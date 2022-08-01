@@ -32,10 +32,18 @@
                 <div class="box-form">
                     <form action="{{ route('auth.login') }}" method="post">
                         @csrf
-                        <h3>Login</h3>
+                        <div class="d-flex justify-content-center">
+                            <h3>Login</h3>
+                        </div>
                         @if (session('registerSuccess'))
-                            <div class="alert alert-success " role="alert">
+                            <div class="alert alert-danger" role="alert">
                                 {{ session('registerSuccess') }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        @endif
+                        @if (session('loginFailed'))
+                            <div class="alert alert-danger" role="alert">
+                                {{ session('loginFailed') }}
                                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                             </div>
                         @endif
@@ -47,9 +55,11 @@
                             <label for="" class="form-label">Password :</label>
                             <input type="password" class="form-control" id="" name="password">
                         </div>
-                        <div class="d-flex justify-content-between">
-                            <a href="/">Back to home</a>
+                        <div class="d-grid mb-3">
                             <button type="submit" class="btn text-white" style="background-color: #BF0000">Login</button>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <a href="/">Back to home</a>                            
                         </div>
                     </form>
                 </div>

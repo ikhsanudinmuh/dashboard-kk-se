@@ -32,7 +32,9 @@
             <div class="box-form">            
                 <form action="{{ route('auth.register') }}" method="post">
                     @csrf
-                    <h3>Register User</h3>
+                    <div class="d-flex justify-content-center">
+                        <h3>Register User</h3>
+                    </div>
                     @if (session('registerFailed'))
                         <div class="alert alert-danger" role="alert">
                             {{ session('registerFailed') }}
@@ -67,9 +69,11 @@
                         </select>
                         <div class="invalid-feedback">@error('role') {{ $message }} @enderror</div>
                     </div>
-                    <div class="d-flex justify-content-between">
-                        <a href="/">Back to home</a>
+                    <div class="d-grid mb-3">
                         <button type="submit" class="btn text-white" style="background-color: #BF0000">Register</button>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="/">Back to home</a>
                     </div>
                 </form>
             </div>

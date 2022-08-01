@@ -14,7 +14,11 @@ class AuthController extends Controller
     }
 
     public function registerPage() {
-        return view('auth.register');
+        if (Auth::user()->role == 'admin') {
+            return view('auth.register');
+        } else {
+            return view('auth.unauthorized');
+        }
     }
     
     public function login(Request $request) {
@@ -26,10 +30,8 @@ class AuthController extends Controller
         if (Auth::attempt($data)) {
             $request->session()->regenerate();
 
-            if (Auth::user() && Auth::user()->role == 'lecturer') {
+            if (Auth::user()) {
                 return redirect('/');
-            } elseif (Auth::user() && Auth::user()->role == 'admin') {
-                return redirect('/admin');
             }
         }
 
@@ -68,7 +70,7 @@ class AuthController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 
 }

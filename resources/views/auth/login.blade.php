@@ -49,11 +49,13 @@
                         @endif
                         <div class="mb-3">
                             <label for="" class="form-label">Email Address :</label>
-                            <input type="text" class="form-control" id="" name="email">
+                            <input type="text" class="form-control @error('email') is-invalid @enderror" id="" name="email">
+                            <div class="invalid-feedback">@error('email') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Password :</label>
-                            <input type="password" class="form-control" id="" name="password">
+                            <input type="password" class="form-control @error('password') is-invalid @enderror" id="" name="password">
+                            <div class="invalid-feedback">@error('email') {{ $message }} @enderror</div>
                         </div>
                         <div class="d-grid mb-3">
                             <button type="submit" class="btn text-white" style="background-color: #BF0000">Login</button>

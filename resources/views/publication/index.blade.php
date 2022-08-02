@@ -7,6 +7,9 @@
     <body>
         @include('layouts.navbar')
         <div class="container">
+            <div class="mt-3 mb-3">
+                <h3>Publication Data</h3>
+            </div>
             <div class="mb-3">
                 <table id="table_publication" class="display">
                     <thead>

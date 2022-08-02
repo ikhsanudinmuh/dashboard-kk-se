@@ -1,12 +1,12 @@
-<nav class="navbar navbar-dark navbar-expand-lg fixed-top" style="background-color: #BF0000;">
+<nav class="navbar navbar-dark navbar-expand-lg" style="background-color: #BF0000;">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img src="/assets/logo kk se.png" alt="" style="height: 50px"></a>
+      <a class="navbar-brand" href="/"><img src="/assets/logo kk se.png" alt="" style="height: 50px"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
-              <a class="nav-link" href="#">Publication</a>
+              <a class="nav-link" href="/publication">Publication</a>
               <a class="nav-link" href="#">Research</a>
               <a class="nav-link" href="#">HKI</a>
               <a class="nav-link" href="#">Abdimas</a>

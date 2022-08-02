@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('publications', function (Blueprint $table) {
-            $table->id();
-            $table->date('YY')('year');
+            $table->increments('id');
+            $table->text('year');
             $table->integer('writer_1_id')->unsigned();
             $table->integer('writer_2_id')->unsigned()->nullable();
             $table->integer('writer_3_id')->unsigned()->nullable();

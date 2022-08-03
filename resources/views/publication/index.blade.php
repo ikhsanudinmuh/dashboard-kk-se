@@ -52,54 +52,60 @@
                         <div class="mb-3">
                             <label for="" class="form-label">Writer 1 :</label>
                             <select class="form-select @error('writer_1_id') is-invalid @enderror" name="writer_1_id">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($writer as $w)
+                                    <option value="" selected>Please select</option>
+                                    <option value={{ $w->id }}>{{ $w->name . ' - ' . $w->code }}</option>                                    
+                                @endforeach
                             </select>
                             <div class="invalid-feedback">@error('writer_1_id') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Writer 2 :</label>
                             <select class="form-select @error('writer_2_id') is-invalid @enderror" name="writer_2_id">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($writer as $w)
+                                    <option value="" selected>Please select</option>
+                                    <option value={{ $w->id }}>{{ $w->name . ' - ' . $w->code }}</option>                                    
+                                @endforeach
                             </select>
                             <div class="invalid-feedback">@error('writer_2_id') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Writer 3 :</label>
                             <select class="form-select @error('writer_3_id') is-invalid @enderror" name="writer_3_id">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($writer as $w)
+                                    <option value="" selected>Please select</option>
+                                    <option value={{ $w->id }}>{{ $w->name . ' - ' . $w->code }}</option>                                    
+                                @endforeach
                             </select>
                             <div class="invalid-feedback">@error('writer_3_id') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Writer 4 :</label>
                             <select class="form-select @error('writer_4_id') is-invalid @enderror" name="writer_4_id">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($writer as $w)
+                                    <option value="" selected>Please select</option>
+                                    <option value={{ $w->id }}>{{ $w->name . ' - ' . $w->code }}</option>                                    
+                                @endforeach
                             </select>
                             <div class="invalid-feedback">@error('writer_4_id') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Writer 5 :</label>
                             <select class="form-select @error('writer_5_id') is-invalid @enderror" name="writer_5_id">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($writer as $w)
+                                    <option value="" selected>Please select</option>
+                                    <option value={{ $w->id }}>{{ $w->name . ' - ' . $w->code }}</option>                                    
+                                @endforeach
                             </select>
                             <div class="invalid-feedback">@error('writer_5_id') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Writer 6 :</label>
                             <select class="form-select @error('writer_6_id') is-invalid @enderror" name="writer_6_id">
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
+                                @foreach ($writer as $w)
+                                    <option value="" selected>Please select</option>
+                                    <option value={{ $w->id }}>{{ $w->name . ' - ' . $w->code }}</option>                                    
+                                @endforeach
                             </select>
                             <div class="invalid-feedback">@error('writer_6_id') {{ $message }} @enderror</div>
                         </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class PublicationController extends Controller
@@ -13,7 +14,11 @@ class PublicationController extends Controller
      */
     public function index()
     {
-        return view('publication.index');
+        $writer = User::where('role', 'lecturer')
+                    ->orderBy('name')
+                    ->get();
+
+        return view('publication.index', ['writer' => $writer]);
     }
 
     /**

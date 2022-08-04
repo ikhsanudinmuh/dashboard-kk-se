@@ -7,27 +7,37 @@
     <body>
         @include('layouts.navbar')
         <div class="container">
+            @if (session('success'))
+                <div class="alert alert-success" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
             <div class="mt-3 mb-3">
                 <h3>Publication Data</h3>
             </div>
-            <div class="mb-3">
-                <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#addData" style="background-color: #BF0000">
-                    Add Data
-                </button>
-            </div>
+            @if (Auth::check() == TRUE  && Auth::user()->role == 'lecturer')
+                <div class="mb-3">
+                    <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#addData" style="background-color: #BF0000">
+                        Add Data
+                    </button>
+                </div>                
+            @endif
             <div class="mb-3">
                 <table id="table_publication" class="display">
                     <thead>
                         <tr>
-                            <th>Column 1</th>
-                            <th>Column 2</th>
+                            <th>Year</th>
+                            <th>Title</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>Row 1 Data 1</td>
-                            <td>Row 1 Data 2</td>
-                        </tr>
+                        @foreach ($publication as $p)
+                            <tr>
+                                <td>{{ $p->year }}</td>
+                                <td>{{ $p->title }}</td>
+                            </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -42,7 +52,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="" method="post">
+                    <form action="{{ route('publication.store') }}" method="post" enctype="multipart/form-data">
                         @csrf
                         <div class="mb-3">
                             <label for="" class="form-label">Year(YYYY) :</label>
@@ -60,7 +70,7 @@
                             <div class="invalid-feedback">@error('writer_1_id') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
-                            <label for="" class="form-label">Writer 2 :</label>
+                            <label for="" class="form-label">Writer 2(Optional) :</label>
                             <select class="form-select @error('writer_2_id') is-invalid @enderror" name="writer_2_id">
                                 @foreach ($writer as $w)
                                     <option value="" selected>Please select</option>
@@ -70,7 +80,7 @@
                             <div class="invalid-feedback">@error('writer_2_id') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
-                            <label for="" class="form-label">Writer 3 :</label>
+                            <label for="" class="form-label">Writer 3(Optional) :</label>
                             <select class="form-select @error('writer_3_id') is-invalid @enderror" name="writer_3_id">
                                 @foreach ($writer as $w)
                                     <option value="" selected>Please select</option>
@@ -80,7 +90,7 @@
                             <div class="invalid-feedback">@error('writer_3_id') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
-                            <label for="" class="form-label">Writer 4 :</label>
+                            <label for="" class="form-label">Writer 4(Optional) :</label>
                             <select class="form-select @error('writer_4_id') is-invalid @enderror" name="writer_4_id">
                                 @foreach ($writer as $w)
                                     <option value="" selected>Please select</option>
@@ -90,7 +100,7 @@
                             <div class="invalid-feedback">@error('writer_4_id') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
-                            <label for="" class="form-label">Writer 5 :</label>
+                            <label for="" class="form-label">Writer 5(Optional) :</label>
                             <select class="form-select @error('writer_5_id') is-invalid @enderror" name="writer_5_id">
                                 @foreach ($writer as $w)
                                     <option value="" selected>Please select</option>
@@ -100,7 +110,7 @@
                             <div class="invalid-feedback">@error('writer_5_id') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
-                            <label for="" class="form-label">Writer 6 :</label>
+                            <label for="" class="form-label">Writer 6(Optional) :</label>
                             <select class="form-select @error('writer_6_id') is-invalid @enderror" name="writer_6_id">
                                 @foreach ($writer as $w)
                                     <option value="" selected>Please select</option>
@@ -115,7 +125,7 @@
                             <div class="invalid-feedback">@error('lab') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
-                            <label for="" class="form-label">Partner Institution :</label>
+                            <label for="" class="form-label">Partner Institution(Optional) :</label>
                             <textarea name="partner_institution" class="form-control @error('partner_instition') is-invalid @enderror" cols="30" rows="3"></textarea>
                             <div class="invalid-feedback">@error('partner_institution') {{ $message }} @enderror</div>
                         </div>
@@ -149,8 +159,8 @@
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">File(Optional) :</label>
-                            <input type="file" class="form-control" name="file">
-                            <div class="invalid-feedback">@error('file') {{ $message }} @enderror</div>
+                            <input type="file" class="form-control" name="publication_file">
+                            <div class="invalid-feedback">@error('publication_file') {{ $message }} @enderror</div>
                         </div>
                         <div class="d-grid mb-3">
                             <button type="submit" class="btn text-white" style="background-color: #BF0000">Submit</button>

@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Publication;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PublicationController extends Controller
 {
@@ -18,7 +20,9 @@ class PublicationController extends Controller
                     ->orderBy('name')
                     ->get();
 
-        return view('publication.index', ['writer' => $writer]);
+        $publication = DB::table('publications')->get();
+
+        return view('publication.index', ['writer' => $writer, 'publication' => $publication]);
     }
 
     /**
@@ -39,7 +43,45 @@ class PublicationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'year' => 'required|numeric',
+            'writer_1_id' => 'required|numeric',
+            'lab' => 'required|string',
+            'title' => 'required|string',
+            'type' => 'required|string',
+            'journal_conference' => 'required|string',
+            'journal_accreditation' => 'required|string',
+            'link' => 'required',
+            'publication_file' => 'mimes:pdf',
+        ]);
+
+        $publication = new Publication();
+        $publication->year = $data['year'];
+        $publication->writer_1_id = $data['writer_1_id'];
+        $publication->writer_2_id = $request->writer_2_id != '' ? $request->writer_2_id : null;
+        $publication->writer_3_id = $request->writer_3_id != '' ? $request->writer_3_id : null;
+        $publication->writer_4_id = $request->writer_4_id != '' ? $request->writer_4_id : null;
+        $publication->writer_5_id = $request->writer_5_id != '' ? $request->writer_5_id : null;
+        $publication->writer_6_id = $request->writer_6_id != '' ? $request->writer_6_id : null;
+        $publication->lab = $data['lab'];
+        $publication->partner_institution = $request->partner_institution != '' ? $request->partner_institution : null;
+        $publication->title = $data['title'];
+        $publication->type = $data['type'];
+        $publication->journal_conference = $data['journal_conference'];
+        $publication->journal_accreditation = $data['journal_accreditation'];
+        $publication->link = $data['link'];
+
+        if ($request->hasFile('publication_file')) {
+            $file = 'publication_' . time() . $request->file('publication_file')->extension();
+
+            $request->publication_file->move(public_path('publication_file'), $file);
+            $publication->publication_file = $file;
+        }
+
+        
+        $publication->save();
+        
+        return redirect('/publication')->with('success', 'Successfully added publication data');
     }
 
     /**

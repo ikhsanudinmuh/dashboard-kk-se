@@ -5,8 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class publication extends Model
+class Publication extends Model
 {
+    
+    use HasFactory;
+    
     protected $fillable = [
         'year',
         'writer_1_id',
@@ -22,8 +25,6 @@ class publication extends Model
         'journal_conference',
         'journal_accreditation',
         'link',
-        'file',
+        'pubication_file',
     ];
-
-    use HasFactory;
 }

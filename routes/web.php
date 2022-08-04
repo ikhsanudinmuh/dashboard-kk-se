@@ -28,4 +28,5 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 //publication routes
 Route::get('/publication', [PublicationController::class, 'index']);
+Route::post('/publication', [PublicationController::class, 'store'])->name('publication.store');
 

@@ -29,7 +29,7 @@ return new class extends Migration
             $table->text('journal_conference');
             $table->string('journal_accreditation');
             $table->text('link');
-            $table->text('file')->nullable();
+            $table->text('publication_file')->nullable();
             $table->timestamps();
 
             $table->foreign('writer_1_id')->references('id')->on('users')->onDelete('cascade');

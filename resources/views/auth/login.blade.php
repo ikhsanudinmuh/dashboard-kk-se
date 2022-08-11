@@ -23,6 +23,10 @@
                 -webkit-transform: translate(-50%, -50%);
                 transform: translate(-50%, -50%);
             }
+
+            .btn-google {
+                background-color: #BF0000,
+            }
         </style>
     </head>
     <body>
@@ -30,23 +34,23 @@
             <div class="layout">
                 <img class="logo-se" src="/assets/logo kk se.png" alt="">
                 <div class="box-form">
-                    <form action="{{ route('auth.login') }}" method="post">
-                        @csrf
-                        <div class="d-flex justify-content-center">
-                            <h3>Login</h3>
+                    <div class="d-flex justify-content-center mb-3">
+                        <h3>Login</h3>
+                    </div>
+                    @if (session('registerSuccess'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('registerSuccess') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
-                        @if (session('registerSuccess'))
-                            <div class="alert alert-danger" role="alert">
-                                {{ session('registerSuccess') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        @endif
-                        @if (session('loginFailed'))
-                            <div class="alert alert-danger" role="alert">
-                                {{ session('loginFailed') }}
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        @endif
+                    @endif
+                    @if (session('loginFailed'))
+                        <div class="alert alert-danger" role="alert">
+                            {{ session('loginFailed') }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
+                    {{-- <form action="{{ route('auth.login') }}" method="post">
+                        @csrf
                         <div class="mb-3">
                             <label for="" class="form-label">Email Address :</label>
                             <input type="text" class="form-control @error('email') is-invalid @enderror" id="" name="email">
@@ -63,7 +67,13 @@
                         <div class="d-flex justify-content-center">
                             <a href="/">Back to home</a>                            
                         </div>
-                    </form>
+                    </form> --}}
+                    <div class="d-flex justify-content-center mb-3">
+                        <a href="{{ route('redirect') }}" class="btn text-white" style="background-color: #BF0000"><img src="/assets/google.png" alt="" srcset="" style="height: 25px;"> Login with Google</a>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <a href="/">Back to home</a>                            
+                    </div>
                 </div>
             </div>
         </div>        

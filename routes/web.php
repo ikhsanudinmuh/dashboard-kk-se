@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\GoogleProviderController;
 use App\Http\Controllers\PublicationController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('index');
 });
+
+//google auth routes
+Route::get('/redirect', [GoogleProviderController::class, 'redirect'])->name('redirect');
+Route::get('/callback', [GoogleProviderController::class, 'callback'])->name('callback');
 
 //auth routes
 Route::get('/login', [AuthController::class, 'loginPage']);

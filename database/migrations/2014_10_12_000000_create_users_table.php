@@ -17,7 +17,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password');
+            $table->string('google_id');
             $table->string('code')->nullable();
             $table->enum('role', ['lecturer', 'admin']);
             $table->timestamp('email_verified_at')->nullable();

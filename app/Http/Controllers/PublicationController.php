@@ -16,13 +16,15 @@ class PublicationController extends Controller
      */
     public function index()
     {
-        $writer = User::where('role', 'lecturer')
+        //ambil data penulis
+        $author = User::where('role', 'lecturer')
                     ->orderBy('name')
                     ->get();
 
+        //ambil data publikasi
         $publication = DB::table('publications')->get();
 
-        return view('publication.index', ['writer' => $writer, 'publication' => $publication]);
+        return view('publication.index', ['author' => $author, 'publication' => $publication]);
     }
 
     /**

@@ -12,12 +12,12 @@ class Publication extends Model
     
     protected $fillable = [
         'year',
-        'writer_1_id',
-        'writer_2_id',
-        'writer_3_id',
-        'writer_4_id',
-        'writer_5_id',
-        'writer_6_id',
+        'author_1_id',
+        'author_2_id',
+        'author_3_id',
+        'author_4_id',
+        'author_5_id',
+        'author_6_id',
         'lab',
         'partner_institution',
         'title',

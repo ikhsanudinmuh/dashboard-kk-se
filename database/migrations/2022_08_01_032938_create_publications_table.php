@@ -16,12 +16,12 @@ return new class extends Migration
         Schema::create('publications', function (Blueprint $table) {
             $table->increments('id');
             $table->text('year');
-            $table->integer('writer_1_id')->unsigned();
-            $table->integer('writer_2_id')->unsigned()->nullable();
-            $table->integer('writer_3_id')->unsigned()->nullable();
-            $table->integer('writer_4_id')->unsigned()->nullable();
-            $table->integer('writer_5_id')->unsigned()->nullable();
-            $table->integer('writer_6_id')->unsigned()->nullable();
+            $table->integer('author_1_id')->unsigned();
+            $table->integer('author_2_id')->unsigned()->nullable();
+            $table->integer('author_3_id')->unsigned()->nullable();
+            $table->integer('author_4_id')->unsigned()->nullable();
+            $table->integer('author_5_id')->unsigned()->nullable();
+            $table->integer('author_6_id')->unsigned()->nullable();
             $table->string('lab');
             $table->text('partner_institution')->nullable();
             $table->text('title');
@@ -32,12 +32,12 @@ return new class extends Migration
             $table->text('publication_file')->nullable();
             $table->timestamps();
 
-            $table->foreign('writer_1_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('writer_2_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('writer_3_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('writer_4_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('writer_5_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('writer_6_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('author_1_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('author_2_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('author_3_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('author_4_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('author_5_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('author_6_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

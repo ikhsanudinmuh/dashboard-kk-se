@@ -19,7 +19,11 @@
                     <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       {{ Auth::user()->name }}
                     </button>
-                    @if (Auth::user()->role == 'lecturer')
+                    @if (Auth::user()->role == 'user')
+                      <ul class="dropdown-menu dropdown-menu-end">
+                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
+                      </ul>                      
+                    @elseif (Auth::user()->role == 'lecturer')
                       <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="#">Action</a></li>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>

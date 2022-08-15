@@ -26,9 +26,9 @@ Route::get('/callback', [GoogleProviderController::class, 'callback'])->name('ca
 
 //auth routes
 Route::get('/login', [AuthController::class, 'loginPage']);
-Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
-Route::get('/register', [AuthController::class, 'registerPage']);
-Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
+// Route::post('/login', [AuthController::class, 'login'])->name('auth.login');
+// Route::get('/register', [AuthController::class, 'registerPage']);
+// Route::post('/register', [AuthController::class, 'register'])->name('auth.register');
 Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 //publication routes

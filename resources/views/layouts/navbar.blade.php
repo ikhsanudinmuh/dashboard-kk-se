@@ -31,7 +31,7 @@
                       </ul>
                     @endif
                   @else
-                    <a class="btn btn-light" href="{{ route('auth.login') }}" role="button">Login</a>
+                    <a class="btn btn-light" href="/login" role="button">Login</a>
                   @endif
                 </div>
             </div>

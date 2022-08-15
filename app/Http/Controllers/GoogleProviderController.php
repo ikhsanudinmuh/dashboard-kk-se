@@ -51,6 +51,7 @@ class GoogleProviderController extends Controller
                     'name' => $providerUser->name,
                     'email' => $providerUser->email,
                     'google_id' => $providerUser->id,
+                    'role' => 'user',
                     'email_verified_at' => Carbon::now(),
                 ]);
             }

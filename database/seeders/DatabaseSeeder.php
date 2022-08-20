@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Publication_type;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -16,19 +17,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::create([
-            'name' => 'Muhammad Ikhsaudin',
-            'email' => 'ikhsan@gmail.com',
-            'password' => Hash::make('ikhsan123'),
-            'code' => 'SAN',
-            'role' => 'lecturer',
+        //add publication_type data
+        Publication_type::create([
+            'name' => 'Jurnal Internasional'
         ]);
-
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'password' => Hash::make('admin123'),
-            'role' => 'admin',
+        Publication_type::create([
+            'name' => 'Jurnal Nasional'
         ]);
+        Publication_type::create([
+            'name' => 'Prosiding Internasional'
+        ]);
+        Publication_type::create([
+            'name' => 'Prosiding Nasional'
+        ]);
+        
     }
 }

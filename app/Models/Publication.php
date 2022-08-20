@@ -21,10 +21,10 @@ class Publication extends Model
         'lab',
         'partner_institution',
         'title',
-        'type',
+        'publication_type_id',
         'journal_conference',
-        'journal_accreditation',
+        'journal_accreditation_id',
         'link',
-        'pubication_file',
+        'publication_file',
     ];
 }

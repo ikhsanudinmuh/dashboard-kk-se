@@ -16,7 +16,7 @@
             <div class="mt-3 mb-3">
                 <h3>Publication Data</h3>
             </div>
-            @if (Auth::check() == TRUE  && Auth::user()->role == 'lecturer')
+            @if (Auth::check() == TRUE  && Auth::user()->role == 'lecturer' || Auth::user()->role == 'admin')
                 <div class="mb-3">
                     <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#addData" style="background-color: #BF0000">
                         Add Data
@@ -112,9 +112,9 @@
                         <div class="mb-3">
                             <label for="" class="form-label">Author 6(Optional) :</label>
                             <select class="form-select @error('author_6_id') is-invalid @enderror" name="author_6_id">
-                                @foreach ($author as $w)
+                                @foreach ($author as $a)
                                     <option value="" selected>Please select</option>
-                                    <option value={{ $w->id }}>{{ $w->name . ' - ' . $w->code }}</option>                                    
+                                    <option value={{ $a->id }}>{{ $a->name . ' - ' . $a->code }}</option>                                    
                                 @endforeach
                             </select>
                             <div class="invalid-feedback">@error('author_6_id') {{ $message }} @enderror</div>
@@ -135,12 +135,13 @@
                             <div class="invalid-feedback">@error('title') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
-                            <label for="" class="form-label">Type :</label>
-                            <select class="form-select @error('type') is-invalid @enderror" name="type">
-                                <option value="Jurnal Internasional">Jurnal Internasional</option>
-                                <option value="Prosiding Internasional">Prosiding Internasional</option>
+                            <label for="" class="form-label">Publication Type :</label>
+                            <select class="form-select @error('publication_type_id') is-invalid @enderror" name="publication_type_id">
+                                @foreach ($publication_type as $pt)
+                                    <option value={{ $pt->id }}>{{ $pt->name }}</option>                               
+                                @endforeach
                             </select>
-                            <div class="invalid-feedback">@error('type') {{ $message }} @enderror</div>
+                            <div class="invalid-feedback">@error('publication_type_id') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Journal/Conference :</label>
@@ -149,8 +150,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Journal Accreditation :</label>
-                            <input type="text" class="form-control @error('journal_accreditation') is-invalid @enderror" id="" name="journal_accreditation">
-                            <div class="invalid-feedback">@error('journal_accreditation') {{ $message }} @enderror</div>
+                            <select class="form-select @error('journal_accreditation_id') is-invalid @enderror" name="journal_accreditation_id">
+                                @foreach ($journal_accreditation as $ja)
+                                    <option value={{ $ja->id }}>{{ $ja->name }}</option>                               
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">@error('journal_accreditation_id') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Link :</label>

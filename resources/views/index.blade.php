@@ -5,7 +5,7 @@
         @include('layouts.navbar')
         <div class="container">
             @if (session('loginSuccess'))
-                <div class="alert alert-success" role="alert">
+                <div class="alert alert-success mb-3" role="alert">
                     {{ session('loginSuccess') }}
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>

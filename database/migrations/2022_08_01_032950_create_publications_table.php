@@ -22,7 +22,7 @@ return new class extends Migration
             $table->integer('author_4_id')->unsigned()->nullable();
             $table->integer('author_5_id')->unsigned()->nullable();
             $table->integer('author_6_id')->unsigned()->nullable();
-            $table->string('lab');
+            $table->integer('lab_id')->unsigned();
             $table->text('partner_institution')->nullable();
             $table->text('title');
             $table->integer('publication_type_id')->unsigned();
@@ -38,6 +38,7 @@ return new class extends Migration
             $table->foreign('author_4_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('author_5_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('author_6_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('lab_id')->references('id')->on('labs')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('publication_type_id')->references('id')->on('publication_types')->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('journal_accreditation_id')->references('id')->on('journal_accreditations')->onDelete('cascade')->onUpdate('cascade');
         });

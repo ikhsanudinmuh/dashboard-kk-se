@@ -18,7 +18,7 @@ class Publication extends Model
         'author_4_id',
         'author_5_id',
         'author_6_id',
-        'lab',
+        'lab_id',
         'partner_institution',
         'title',
         'publication_type_id',

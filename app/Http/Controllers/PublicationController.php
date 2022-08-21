@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Journal_accreditation;
+use App\Models\Lab;
 use App\Models\Publication;
 use App\Models\Publication_type;
 use App\Models\User;
@@ -30,14 +31,20 @@ class PublicationController extends Controller
         //ambil data tipe akreditasi jurnal
         $journal_accreditation = Journal_accreditation::all();
 
+        //ambil data lab
+        $lab = Lab::all();
+
         //ambil data publikasi
-        $publication = DB::table('publications')->get();
+        $publication = DB::table('publications')
+                        
+                        ->get();
 
         return view('publication.index', [
             'author' => $author, 
             'publication' => $publication,
             'publication_type' => $publication_type,
             'journal_accreditation' => $journal_accreditation,
+            'lab' => $lab,
         ]);
     }
 
@@ -62,7 +69,7 @@ class PublicationController extends Controller
         $data = $request->validate([
             'year' => 'required|numeric',
             'author_1_id' => 'required|numeric',
-            'lab' => 'required|string',
+            'lab_id' => 'required|numeric',
             'title' => 'required|string',
             'publication_type_id' => 'required|numeric',
             'journal_conference' => 'required|string',
@@ -79,7 +86,7 @@ class PublicationController extends Controller
         $publication->author_4_id = $request->author_4_id != '' ? $request->author_4_id : null;
         $publication->author_5_id = $request->author_5_id != '' ? $request->author_5_id : null;
         $publication->author_6_id = $request->author_6_id != '' ? $request->author_6_id : null;
-        $publication->lab = $request->lab;
+        $publication->lab_id = $request->lab_id;
         $publication->partner_institution = $request->partner_institution != '' ? $request->partner_institution : null;
         $publication->title = $request->title;
         $publication->publication_type_id = $request->publication_type_id;

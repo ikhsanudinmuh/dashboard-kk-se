@@ -121,8 +121,12 @@
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Research Lab :</label>
-                            <input type="text" class="form-control @error('lab') is-invalid @enderror" id="" name="lab">
-                            <div class="invalid-feedback">@error('lab') {{ $message }} @enderror</div>
+                            <select class="form-select @error('lab_id') is-invalid @enderror" name="lab_id">
+                                @foreach ($lab as $l)
+                                    <option value={{ $l->id }}>{{ $l->name }}</option>                               
+                                @endforeach
+                            </select>
+                            <div class="invalid-feedback">@error('lab_id') {{ $message }} @enderror</div>
                         </div>
                         <div class="mb-3">
                             <label for="" class="form-label">Partner Institution(Optional) :</label>

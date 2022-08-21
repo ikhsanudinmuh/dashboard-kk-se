@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Journal_accreditation;
+use App\Models\Lab;
 use App\Models\Publication_type;
 use App\Models\User;
 use Carbon\Carbon;
@@ -19,7 +20,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        //add publication_type data
+        //menambahkan data tipe publikasi
         $publication_type = [
             ['name' => 'International Journal', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'National Journal', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
@@ -29,7 +30,7 @@ class DatabaseSeeder extends Seeder
         
         Publication_type::insert($publication_type);
         
-        //add journal_accreditation data
+        //menambahkan data tipe akreditasi jurnal
         $journal_accreditation = [
             ['name' => 'Q1', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Q2', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
@@ -44,7 +45,17 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Not Accredited', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Unidentified', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
         ];
-
+        
         Journal_accreditation::insert($journal_accreditation);
+        
+        $lab = [
+            ['name' => 'Advanced Software Engineering', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Mobile and Innovation', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Information Science and Engineering', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Technology Enhanced Learning Center', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+
+        ];
+
+        Lab::insert($lab);
     }
 }

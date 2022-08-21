@@ -40,13 +40,13 @@ class GoogleProviderController extends Controller
         $user = User::where('email', $providerUser->getEmail())->first();
 
         if(!$user) {
-            $validEmail = preg_match(
-                "/([A-Za-z0-9._%+-]+@student.telkomuniversity.ac.id$)|([A-Za-z0-9._%+-]+@telkomuniversity.ac.id$)/",
-                $providerUser->email);
+            // $validEmail = preg_match(
+            //     "/([A-Za-z0-9._%+-]+@student.telkomuniversity.ac.id$)|([A-Za-z0-9._%+-]+@telkomuniversity.ac.id$)/",
+            //     $providerUser->email);
 
             $user = null;
 
-            if ($validEmail) {
+            // if ($validEmail) {
                 $user = User::create([
                     'name' => $providerUser->name,
                     'email' => $providerUser->email,
@@ -54,7 +54,7 @@ class GoogleProviderController extends Controller
                     'role' => 'user',
                     'email_verified_at' => Carbon::now(),
                 ]);
-            }
+            // }
         }
 
         return $user;

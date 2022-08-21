@@ -22,8 +22,8 @@ class PublicationController extends Controller
     {
         //ambil data penulis
         $author = User::where('role', 'lecturer')
-                    ->orderBy('name')
-                    ->get();
+            ->orderBy('name')
+            ->get();
 
         //ambil data tipe publikasi            
         $publication_type = Publication_type::all();
@@ -36,8 +36,30 @@ class PublicationController extends Controller
 
         //ambil data publikasi
         $publication = DB::table('publications')
-                        
-                        ->get();
+            ->leftJoin('users as a1', 'publications.author_1_id', '=', 'a1.id')
+            ->leftJoin('users as a2', 'publications.author_2_id', '=', 'a2.id')
+            ->leftJoin('users as a3', 'publications.author_3_id', '=', 'a3.id')
+            ->leftJoin('users as a4', 'publications.author_4_id', '=', 'a4.id')
+            ->leftJoin('users as a5', 'publications.author_5_id', '=', 'a5.id')
+            ->leftJoin('users as a6', 'publications.author_6_id', '=', 'a6.id')
+            ->leftJoin('labs', 'publications.lab_id' , '=', 'labs.id')
+            ->leftJoin('publication_types', 'publications.publication_type_id' , '=', 'publication_types.id')
+            ->leftJoin('journal_accreditations', 'publications.journal_accreditation_id' , '=', 'journal_accreditations.id')
+            ->select(
+                'publications.*',
+                'a1.name as author1',
+                'a2.name as author2',
+                'a3.name as author3',
+                'a4.name as author4',
+                'a5.name as author5',
+                'a6.name as author6',
+                'labs.name as lab_name',
+                'publication_types.name as publication_type',
+                'journal_accreditations.name as journal_accreditation',
+            )
+            ->get();
+
+        // dd($publication);
 
         return view('publication.index', [
             'author' => $author, 

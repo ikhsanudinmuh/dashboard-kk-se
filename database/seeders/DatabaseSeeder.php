@@ -48,6 +48,7 @@ class DatabaseSeeder extends Seeder
         
         Journal_accreditation::insert($journal_accreditation);
         
+        //menambahkan data lab
         $lab = [
             ['name' => 'Advanced Software Engineering', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Mobile and Innovation', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],

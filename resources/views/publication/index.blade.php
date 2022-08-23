@@ -13,6 +13,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
+
             <div class="mt-3 mb-3">
                 <h3>Publication Data</h3>
             </div>
@@ -29,6 +30,10 @@
                         <tr>
                             <th>Year</th>
                             <th>Title</th>
+                            <th>Journal/Conference</th>
+                            <th>Link</th>
+                            <th>Detail</th>
+                            <th>File</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,6 +41,22 @@
                             <tr>
                                 <td>{{ $p->year }}</td>
                                 <td>{{ $p->title }}</td>
+                                <td>{{ $p->journal_conference }}</td>
+                                <td><a href="{{ $p->link }}" target="_blank">Link</a></td>
+                                <td>
+                                    <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#publicationdetail{{ $p->id }}" style="background-color: #BF0000">
+                                        Detail
+                                    </button>
+                                </td>
+                                <td>
+                                    @if ($p->publication_file != null)
+                                        <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#publicationfile{{ $p->id }}" style="background-color: #BF0000">
+                                            Open File
+                                        </button>                                        
+                                    @else
+                                        No File
+                                    @endif
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -43,7 +64,7 @@
             </div>
         </div>
 
-        <!-- Add Publication Data Modal -->
+        <!-- Modal untuk tambah data publikasi -->
         <div class="modal fade" id="addData" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
             <div class="modal-content">
@@ -179,6 +200,74 @@
             </div>
             </div>
         </div>
+
+        @foreach ($publication as $p)
+            <!-- Modal untuk lihat detail data publikasi -->
+            <div class="modal fade" id="publicationdetail{{ $p->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{{ $p->title }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <h6>Year : </h6>
+                        {{ $p->year }}
+                        <br><br>
+
+                        <h6>Author : </h6>
+                        {{ $p->author1 }}
+                        @if ($p->author2 != NULL) , {{ $p->author2 }} @endif
+                        @if ($p->author3 != NULL) , {{ $p->author3 }} @endif
+                        @if ($p->author4 != NULL) , {{ $p->author4 }} @endif
+                        @if ($p->author5 != NULL) , {{ $p->author5 }} @endif
+                        @if ($p->author6 != NULL) , {{ $p->author6 }} @endif
+                        <br><br>
+
+                        <h6>Research Lab : </h6>
+                        {{ $p->lab_name }}
+                        <br><br>
+
+                        <h6>Partner Institution : </h6>
+                        @if ($p->partner_institution != NULL) {{ $p->partner_institution }} @endif
+                        <br><br>
+
+                        <h6>Publication Type : </h6>
+                        {{ $p->publication_type }}
+                        <br><br>
+
+                        <h6>Journal/Conference : </h6>
+                        {{ $p->journal_conference }}
+                        <br><br>
+
+                        <h6>Journal Accreditation : </h6>
+                        {{ $p->journal_accreditation }}
+                        <br><br>
+
+                        <h6>Link : </h6>
+                        <a href="{{ $p->link }}" target="_blank">Link</a>
+                        <br><br>
+
+                    </div>
+                </div>
+                </div>
+            </div>            
+
+            <!-- Modal untuk lihat pdf dari publikasi -->
+            <div class="modal fade" id="publicationfile{{ $p->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">{{ $p->title }}</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <iframe src="/publication_file/{{ $p->publication_file }}" align="top" height="620" width="100%" frameborder="0" scrolling="auto"></iframe>
+                    </div>
+                </div>
+                </div>
+            </div>            
+        @endforeach
 
         <script>
             $(document).ready( function () {

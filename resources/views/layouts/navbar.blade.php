@@ -30,7 +30,7 @@
                       </ul>                      
                     @elseif (Auth::user()->role == 'admin')
                       <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="/register">Register User</a></li>
+                        <li><a class="dropdown-item" href="/user">Manage User</a></li>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
                       </ul>
                     @endif

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GoogleProviderController;
 use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,4 +35,8 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 //publication routes
 Route::get('/publication', [PublicationController::class, 'index']);
 Route::post('/publication', [PublicationController::class, 'store'])->name('publication.store');
+
+//manage user routes
+Route::get('/user', [UserController::class, 'index']);
+Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
 

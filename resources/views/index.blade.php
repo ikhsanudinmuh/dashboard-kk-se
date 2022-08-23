@@ -1,5 +1,5 @@
 @include('layouts.header')
-        <title>Home | Dashboard</title>    
+        <title>Home | {{ env('APP_NAME') }}</title>    
     </head>
     <body>
         @include('layouts.navbar')

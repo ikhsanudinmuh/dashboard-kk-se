@@ -1,5 +1,5 @@
     @include('layouts.header')
-    <title>Register User | Dashboard</title>    
+    <title>Register User | {{ env('APP_NAME') }}</title>    
     <style>
         .box-form {
             border: 1px solid white; 

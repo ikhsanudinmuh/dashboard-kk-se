@@ -1,10 +1,13 @@
 @include('layouts.header')
-        <title>Unauthorized | Dashboard</title>    
+        <title>Unauthorized | {{ env('APP_NAME') }}</title>    
     </head>
     <body>
+        @include('layouts.navbar')
         <div class="container">
-            <h4>You are not allowed to access that page!</h4>
-            <a href="/">Back to home</a>
+            <div class="mt-3">
+                <h4>You are not allowed to access that page!</h4>
+                <a href="/">Back to home</a>                
+            </div>
         </div>
     </body>
 </html>

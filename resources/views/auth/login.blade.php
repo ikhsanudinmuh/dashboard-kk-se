@@ -1,5 +1,5 @@
 @include('layouts.header')
-        <title>Login | Dashboard</title>    
+        <title>Login | {{ env('APP_NAME') }}</title>    
         <style>
             .box-form {
                 border: 1px solid white; 

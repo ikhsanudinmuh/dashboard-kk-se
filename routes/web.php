@@ -35,6 +35,14 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 //publication routes
 Route::get('/publication', [PublicationController::class, 'index']);
 Route::post('/publication', [PublicationController::class, 'store'])->name('publication.store');
+Route::get('/publication/stats/{view}', [PublicationController::class, 'stats'])->name('publication.stats');
+
+//publication stats routes
+Route::get('/publication/get_stats/per_year', [PublicationController::class, 'publicationPerYear']);
+Route::get('/publication/get_stats/per_author', [PublicationController::class, 'publicationPerAuthor']);
+Route::get('/publication/get_stats/per_author_per_year/{id}', [PublicationController::class, 'publicationPerAuthorPerYear']);
+Route::get('/publication/get_stats/per_publication_type', [PublicationController::class, 'publicationType']);
+Route::get('/publication/get_stats/per_journal_accreditation', [PublicationController::class, 'journalAccreditation']);
 
 //manage user routes
 Route::get('/user', [UserController::class, 'index']);

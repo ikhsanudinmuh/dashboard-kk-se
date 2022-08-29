@@ -22,6 +22,7 @@ class PublicationController extends Controller
     {
         //ambil data penulis
         $author = User::where('role', 'lecturer')
+            ->where('code', '!=', null)
             ->orderBy('name')
             ->get();
 
@@ -68,6 +69,115 @@ class PublicationController extends Controller
             'journal_accreditation' => $journal_accreditation,
             'lab' => $lab,
         ]);
+    }
+
+    public function publicationPerYear()
+    {
+        $data = DB::table('publications')
+            ->select('year', DB::raw('count(*) as total'))
+            ->groupBy('year')
+            ->get();
+
+        return response()->json($data);
+    }
+
+    public function publicationPerAuthor()
+    {
+        $lecturer = User::where('role', 'lecturer')
+            ->get();
+
+        $response = [];
+
+        foreach ($lecturer as $author) {
+            $count = DB::table('publications')
+                ->where('publications.author_1_id', $author->id)
+                ->orWhere('publications.author_2_id', $author->id)
+                ->orWhere('publications.author_3_id', $author->id)
+                ->orWhere('publications.author_4_id', $author->id)
+                ->orWhere('publications.author_5_id', $author->id)
+                ->orWhere('publications.author_6_id', $author->id)
+                ->select(
+                    DB::raw('count(*) as total')
+                )
+                ->get();
+                
+            array_push($response, [
+                'code' => $author->code, 
+                'total' => $count[0]->total,
+            ]);
+        }
+        
+        return response()->json($response);
+    }
+
+    public function publicationPerAuthorPerYear($id)
+    {
+        $lecturer = User::where('id', $id)
+            ->get();
+
+        $response = [];
+
+        foreach ($lecturer as $author) {
+            $data = DB::table('publications')
+                ->where('publications.author_1_id', $author->id)
+                ->orWhere('publications.author_2_id', $author->id)
+                ->orWhere('publications.author_3_id', $author->id)
+                ->orWhere('publications.author_4_id', $author->id)
+                ->orWhere('publications.author_5_id', $author->id)
+                ->orWhere('publications.author_6_id', $author->id)
+                ->select(
+                    'year',
+                    DB::raw('count(*) as total')
+                )
+                ->groupBy('year')
+                ->get();
+                
+            array_push($response, [
+                'code' => $author->code, 
+                'publications' => $data,
+            ]);
+        }
+        
+        return response()->json($response);
+    }
+
+    public function publicationType() 
+    {
+        $data = DB::table('publications')
+            ->leftJoin('publication_types', 'publications.publication_type_id', '=', 'publication_types.id')
+            ->select('publication_types.name as pt_name', DB::raw('count(*) as total'))
+            ->groupBy('publication_types.name')
+            ->get();
+
+        return response()->json($data);
+    }
+
+    public function journalAccreditation() 
+    {
+        $data = DB::table('publications')
+            ->leftJoin('journal_accreditations', 'publications.journal_accreditation_id', '=', 'journal_accreditations.id')
+            ->select('journal_accreditations.name as ja_name', DB::raw('count(*) as total'))
+            ->groupBy('journal_accreditations.name')
+            ->get();
+
+        return response()->json($data);
+    }
+
+    public function stats($view) 
+    {
+        if ($view == 'per_year') {
+            return view('publication.stats_per_year');
+        } else if($view == 'per_publication_type') {
+            return view('publication.stats_per_publication_type');
+        } else if($view == 'per_journal_accreditation') {
+            return view('publication.stats_per_journal_accreditation');
+        } else if($view == 'per_author') {
+            return view('publication.stats_per_author');         
+        } else if($view == 'per_author_per_year') {
+            $author = User::where('role', 'lecturer')
+                ->get();
+            return view('publication.stats_per_author_per_year', ['author' => $author]);           
+        }
     }
 
     /**

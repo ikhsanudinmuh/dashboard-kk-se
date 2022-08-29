@@ -17,12 +17,14 @@
             <div class="mt-3 mb-3">
                 <h3>Publication Data</h3>
             </div>
-            @if (Auth::check() == TRUE  && Auth::user()->role == 'lecturer' || Auth::user()->role == 'admin')
-                <div class="mb-3">
-                    <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#addData" style="background-color: #BF0000">
-                        Add Data
-                    </button>
-                </div>                
+            @if (Auth::check() == TRUE)
+                @if (Auth::user()->role == 'lecturer' || Auth::user()->role == 'admin')
+                    <div class="mb-3">
+                        <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#addData" style="background-color: #BF0000">
+                            Add Data
+                        </button>
+                    </div>
+                @endif
             @endif
             <div class="mb-3">
                 <table id="table_publication" class="display">
@@ -62,6 +64,18 @@
                     </tbody>
                 </table>
             </div>
+
+            <h3>Publication Statistics</h3>
+            <div class="d-flex justify-content-start">
+                <a class="btn btn-primary me-2" href="{{ route('publication.stats', ['view' => 'per_year']) }}" role="button">Publication per Year</a>
+                <a class="btn btn-primary me-2" href="{{ route('publication.stats', ['view' => 'per_publication_type']) }}" role="button">Publication per Type</a>
+                <a class="btn btn-primary me-2" href="{{ route('publication.stats', ['view' => 'per_journal_accreditation']) }}" role="button">Publication per Journal Accreditation</a>
+                <a class="btn btn-primary me-2" href="{{ route('publication.stats', ['view' => 'per_author']) }}" role="button">Publication per Author</a>
+                <a class="btn btn-primary me-2" href="{{ route('publication.stats', ['view' => 'per_author_per_year']) }}" role="button">Publication per Author per Year</a>
+            </div>
+
+            <div class="mb-3"></div>
+
         </div>
 
         <!-- Modal untuk tambah data publikasi -->
@@ -262,7 +276,9 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <iframe src="/publication_file/{{ $p->publication_file }}" align="top" height="620" width="100%" frameborder="0" scrolling="auto"></iframe>
+                        @if ($p->publication_file)
+                            <iframe src="/publication_file/{{ $p->publication_file }}" align="top" height="620" width="100%" frameborder="0" scrolling="auto"></iframe>                            
+                        @endif
                     </div>
                 </div>
                 </div>

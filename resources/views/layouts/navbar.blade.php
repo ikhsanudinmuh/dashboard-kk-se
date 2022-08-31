@@ -1,4 +1,4 @@
-<nav class="navbar navbar-dark navbar-expand-lg" style="background-color: #BF0000;">
+  <nav class="navbar navbar-dark navbar-expand-lg" style="background-color: #BF0000;">
     <div class="container-fluid">
       <a class="navbar-brand" href="/"><img src="/assets/logo kk se.png" alt="" style="height: 50px"></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
@@ -19,18 +19,14 @@
                     <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       {{ Auth::user()->name }}
                     </button>
-                    @if (Auth::user()->role == 'user')
+                    @if (Auth::user()->role == 'user' || Auth::user()->role == 'lecturer')
                       <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                      </ul>                      
-                    @elseif (Auth::user()->role == 'lecturer')
-                      <ul class="dropdown-menu dropdown-menu-end">
-                        <li><a class="dropdown-item" href="#">Action</a></li>
-                        <li><a class="dropdown-item" href="/logout">Logout</a></li>
-                      </ul>                      
+                      </ul>               
                     @elseif (Auth::user()->role == 'admin')
                       <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="/user">Manage User</a></li>
+                        <li><a class="dropdown-item" href="/publication/manage">Manage Publication</a></li>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
                       </ul>
                     @endif

@@ -8,6 +8,7 @@ use App\Models\Publication;
 use App\Models\Publication_type;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -59,8 +60,6 @@ class PublicationController extends Controller
                 'journal_accreditations.name as journal_accreditation',
             )
             ->get();
-
-        // dd($publication);
 
         return view('publication.index', [
             'author' => $author, 
@@ -264,9 +263,62 @@ class PublicationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function manage()
     {
-        //
+        if (Auth::check() == TRUE) {
+            if (Auth::user()->role == 'admin') {
+                //ambil data penulis
+                $author = User::where('role', 'lecturer')
+                ->where('code', '!=', null)
+                ->orderBy('name')
+                ->get();
+
+                //ambil data tipe publikasi            
+                $publication_type = Publication_type::all();
+
+                //ambil data tipe akreditasi jurnal
+                $journal_accreditation = Journal_accreditation::all();
+
+                //ambil data lab
+                $lab = Lab::all();
+
+                //ambil data publikasi
+                $publication = DB::table('publications')
+                    ->leftJoin('users as a1', 'publications.author_1_id', '=', 'a1.id')
+                    ->leftJoin('users as a2', 'publications.author_2_id', '=', 'a2.id')
+                    ->leftJoin('users as a3', 'publications.author_3_id', '=', 'a3.id')
+                    ->leftJoin('users as a4', 'publications.author_4_id', '=', 'a4.id')
+                    ->leftJoin('users as a5', 'publications.author_5_id', '=', 'a5.id')
+                    ->leftJoin('users as a6', 'publications.author_6_id', '=', 'a6.id')
+                    ->leftJoin('labs', 'publications.lab_id' , '=', 'labs.id')
+                    ->leftJoin('publication_types', 'publications.publication_type_id' , '=', 'publication_types.id')
+                    ->leftJoin('journal_accreditations', 'publications.journal_accreditation_id' , '=', 'journal_accreditations.id')
+                    ->select(
+                        'publications.*',
+                        'a1.name as author1',
+                        'a2.name as author2',
+                        'a3.name as author3',
+                        'a4.name as author4',
+                        'a5.name as author5',
+                        'a6.name as author6',
+                        'labs.name as lab_name',
+                        'publication_types.name as publication_type',
+                        'journal_accreditations.name as journal_accreditation',
+                    )
+                    ->get();
+
+                return view('admin.manage_publication', [
+                    'author' => $author, 
+                    'publication' => $publication,
+                    'publication_type' => $publication_type,
+                    'journal_accreditation' => $journal_accreditation,
+                    'lab' => $lab,
+                ]);
+            }
+        } 
+
+        return view('auth.unauthorized');   
+        
     }
 
     /**
@@ -278,7 +330,50 @@ class PublicationController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'year' => 'required|numeric',
+            'author_1_id' => 'required|numeric',
+            'lab_id' => 'required|numeric',
+            'title' => 'required|string',
+            'publication_type_id' => 'required|numeric',
+            'journal_conference' => 'required|string',
+            'journal_accreditation_id' => 'required|numeric',
+            'link' => 'required',
+            'publication_file' => 'mimes:pdf',
+        ]);
+
+        $publication = Publication::findOrFail($id);
+
+        $publication->year = $request->year;
+        $publication->author_1_id = $request->author_1_id;
+        $publication->author_2_id = $request->author_2_id != '' ? $request->author_2_id : null;
+        $publication->author_3_id = $request->author_3_id != '' ? $request->author_3_id : null;
+        $publication->author_4_id = $request->author_4_id != '' ? $request->author_4_id : null;
+        $publication->author_5_id = $request->author_5_id != '' ? $request->author_5_id : null;
+        $publication->author_6_id = $request->author_6_id != '' ? $request->author_6_id : null;
+        $publication->lab_id = $request->lab_id;
+        $publication->partner_institution = $request->partner_institution != '' ? $request->partner_institution : null;
+        $publication->title = $request->title;
+        $publication->publication_type_id = $request->publication_type_id;
+        $publication->journal_conference = $request->journal_conference;
+        $publication->journal_accreditation_id = $request->journal_accreditation_id;
+        $publication->link = $request->link;
+
+        if ($request->hasFile('publication_file')) {
+            $file = 'publication_' . time() . '.' . $request->file('publication_file')->extension();
+
+            $request->publication_file->move(public_path('publication_file'), $file);
+            $publication->publication_file = $file;
+        }
+
+        try {
+            $publication->save();
+
+            return redirect('/publication/manage')->with('success', 'Successfully update publication data');
+
+        } catch (\Exception $e) {
+            return $e->getMessage();
+        }
     }
 
     /**
@@ -289,6 +384,9 @@ class PublicationController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $publication = Publication::find($id);
+        $publication->delete();
+
+        return redirect('/publication/manage')->with('success', 'Successfully delete publication data');
     }
 }

@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GoogleProviderController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\UserController;
+use App\Models\Publication;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -44,7 +45,15 @@ Route::get('/publication/get_stats/per_author_per_year/{id}', [PublicationContro
 Route::get('/publication/get_stats/per_publication_type', [PublicationController::class, 'publicationType']);
 Route::get('/publication/get_stats/per_journal_accreditation', [PublicationController::class, 'journalAccreditation']);
 
-//manage user routes
-Route::get('/user', [UserController::class, 'index']);
-Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+//admin routes
+    //manage user routes
+    Route::get('/user', [UserController::class, 'index']);
+    Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+
+    //manage publication routes
+    Route::get('/publication/manage', [PublicationController::class, 'manage']);
+    Route::put('/publication/manage/{id}', [PublicationController::class, 'update'])->name('publication.update');
+    Route::delete('/publication/manage/delete/{id}', [PublicationController::class, 'destroy'])->name('publication.destroy');
+
+    
 

@@ -32,7 +32,7 @@
               });
               const ctx = document.getElementById('myChart');
               const myChart = new Chart(ctx, {
-                type: 'pie',
+                type: 'bar',
                 data: {
                   labels: publicationType,
                   datasets: [{

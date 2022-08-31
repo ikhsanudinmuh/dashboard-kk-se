@@ -23,7 +23,7 @@ class UserController extends Controller
             }
         } 
 
-        return view('auth.unauthorized');        
+        return view('auth.unauthorized');
     }
 
     /**

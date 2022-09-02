@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Journal_accreditation;
+use App\Models\JournalAccreditation;
 use App\Models\Lab;
 use App\Models\Publication;
-use App\Models\Publication_type;
+use App\Models\PublicationType;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,10 +28,10 @@ class PublicationController extends Controller
             ->get();
 
         //ambil data tipe publikasi            
-        $publication_type = Publication_type::all();
+        $publication_type = PublicationType::all();
 
         //ambil data tipe akreditasi jurnal
-        $journal_accreditation = Journal_accreditation::all();
+        $journal_accreditation = JournalAccreditation::all();
 
         //ambil data lab
         $lab = Lab::all();
@@ -274,10 +274,10 @@ class PublicationController extends Controller
                 ->get();
 
                 //ambil data tipe publikasi            
-                $publication_type = Publication_type::all();
+                $publication_type = PublicationType::all();
 
                 //ambil data tipe akreditasi jurnal
-                $journal_accreditation = Journal_accreditation::all();
+                $journal_accreditation = JournalAccreditation::all();
 
                 //ambil data lab
                 $lab = Lab::all();

@@ -2,9 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Journal_accreditation;
+use App\Models\JournalAccreditation;
 use App\Models\Lab;
-use App\Models\Publication_type;
+use App\Models\PublicationType;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'National Prosiding', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
         ];
         
-        Publication_type::insert($publication_type);
+        PublicationType::insert($publication_type);
         
         //menambahkan data tipe akreditasi jurnal
         $journal_accreditation = [
@@ -46,7 +46,7 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Unidentified', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
         ];
         
-        Journal_accreditation::insert($journal_accreditation);
+        JournalAccreditation::insert($journal_accreditation);
         
         //menambahkan data lab
         $lab = [

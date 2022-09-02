@@ -5,11 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Publication_type extends Model
+class AbdimasType extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'name',
+        'name'
     ];
 }

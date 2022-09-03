@@ -64,25 +64,25 @@ class DatabaseSeeder extends Seeder
         
         //menambahkan data research_type
         $research_type = [
-            ['name' => 'Internal'],
-            ['name' => 'External'],
-            ['name' => 'Independent'],
+            ['name' => 'Internal', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'External', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Independent', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
         ];
 
         ResearchType::insert($research_type);
 
         //menambahkan data patent_type
         $patent_type = [
-            ['name' => 'Copyright'],
-            ['name' => 'Patent'],
+            ['name' => 'Copyright', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'Patent', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
         ];
     
         PatentType::insert($patent_type);
 
         //menambahkan data abdimas_type
         $abdimas_type = [
-            ['name' => 'Internal'],
-            ['name' => 'External'],
+            ['name' => 'Internal', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
+            ['name' => 'External', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
         ];
     
         AbdimasType::insert($abdimas_type);

@@ -79,7 +79,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'code' => 'string|unique:users,code',
+            'code' => 'string',
         ]);
 
         $user = User::findOrFail($id);

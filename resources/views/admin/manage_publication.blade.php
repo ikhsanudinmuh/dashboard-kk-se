@@ -143,7 +143,7 @@
                 </div>
             </div>            
 
-            <!-- Modal untuk tambah data publikasi -->
+            <!-- Modal untuk edit data publikasi -->
         <div class="modal fade" id="editPublication{{ $p->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -232,7 +232,6 @@
                             <div class="mb-3">
                                 <label for="" class="form-label">Author 6(Optional) :</label>
                                 <select class="form-select @error('author_6_id') is-invalid @enderror" name="author_6_id">
-                                    <option value="" selected>Please select</option>
                                     <option value="">Please select</option>
                                     @foreach ($author as $a)
                                         @if ($a->id == $p->author_6_id)

@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\AbdimasTypeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GoogleProviderController;
+use App\Http\Controllers\PatentTypeController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\ResearchTypeController;
 use App\Http\Controllers\UserController;
@@ -62,6 +64,16 @@ Route::get('/publication/get_stats/per_journal_accreditation', [PublicationContr
     Route::post('/research_type/manage', [ResearchTypeController::class, 'store'])->name('research_type.store');
     Route::put('/research_type/manage/{id}', [ResearchTypeController::class, 'update'])->name('research_type.update');
     Route::delete('/research_type/manage/delete/{id}', [ResearchTypeController::class, 'destroy'])->name('research_type.destroy');
-
     
+    //manage patent type routes
+    Route::get('/patent_type/manage', [PatentTypeController::class, 'index']);
+    Route::post('/patent_type/manage', [PatentTypeController::class, 'store'])->name('patent_type.store');
+    Route::put('/patent_type/manage/{id}', [PatentTypeController::class, 'update'])->name('patent_type.update');
+    Route::delete('/patent_type/manage/delete/{id}', [PatentTypeController::class, 'destroy'])->name('patent_type.destroy');
+    
+    //manage abdimas type routes
+    Route::get('/abdimas_type/manage', [AbdimasTypeController::class, 'index']);
+    Route::post('/abdimas_type/manage', [AbdimasTypeController::class, 'store'])->name('abdimas_type.store');
+    Route::put('/abdimas_type/manage/{id}', [AbdimasTypeController::class, 'update'])->name('abdimas_type.update');
+    Route::delete('/abdimas_type/manage/delete/{id}', [AbdimasTypeController::class, 'destroy'])->name('abdimas_type.destroy');
 

@@ -28,6 +28,8 @@
                         <li><a class="dropdown-item" href="/user/manage">Manage User</a></li>
                         <li><a class="dropdown-item" href="/publication/manage">Manage Publication</a></li>
                         <li><a class="dropdown-item" href="/research_type/manage">Manage Research Type</a></li>
+                        <li><a class="dropdown-item" href="/patent_type/manage">Manage Patent Type</a></li>
+                        <li><a class="dropdown-item" href="/abdimas_type/manage">Manage Abdimas Type</a></li>
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
                       </ul>
                     @endif

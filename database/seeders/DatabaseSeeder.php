@@ -2,8 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\AbdimasType;
 use App\Models\JournalAccreditation;
 use App\Models\Lab;
+use App\Models\PatentType;
 use App\Models\PublicationType;
 use App\Models\ResearchType;
 use App\Models\User;
@@ -62,11 +64,27 @@ class DatabaseSeeder extends Seeder
         
         //menambahkan data research_type
         $research_type = [
-            ['name' => 'External'],
             ['name' => 'Internal'],
+            ['name' => 'External'],
             ['name' => 'Independent'],
         ];
 
         ResearchType::insert($research_type);
+
+        //menambahkan data patent_type
+        $patent_type = [
+            ['name' => 'Copyright'],
+            ['name' => 'Patent'],
+        ];
+    
+        PatentType::insert($patent_type);
+
+        //menambahkan data abdimas_type
+        $abdimas_type = [
+            ['name' => 'Internal'],
+            ['name' => 'External'],
+        ];
+    
+        AbdimasType::insert($abdimas_type);
     }
 }

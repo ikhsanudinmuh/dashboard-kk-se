@@ -3,6 +3,8 @@
 use App\Http\Controllers\AbdimasTypeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GoogleProviderController;
+use App\Http\Controllers\JournalAccreditationController;
+use App\Http\Controllers\LabController;
 use App\Http\Controllers\PatentTypeController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\PublicationTypeController;
@@ -65,6 +67,18 @@ Route::get('/publication/get_stats/per_journal_accreditation', [PublicationContr
     Route::post('/publication_type/manage', [PublicationTypeController::class, 'store'])->name('publication_type.store');
     Route::put('/publication_type/manage/{id}', [PublicationTypeController::class, 'update'])->name('publication_type.update');
     Route::delete('/publication_type/manage/delete/{id}', [PublicationTypeController::class, 'destroy'])->name('publication_type.destroy');
+
+    //manage journal accreditation routes
+    Route::get('/journal_accreditation/manage', [JournalAccreditationController::class, 'index']);
+    Route::post('/journal_accreditation/manage', [JournalAccreditationController::class, 'store'])->name('journal_accreditation.store');
+    Route::put('/journal_accreditation/manage/{id}', [JournalAccreditationController::class, 'update'])->name('journal_accreditation.update');
+    Route::delete('/journal_accreditation/manage/delete/{id}', [JournalAccreditationController::class, 'destroy'])->name('journal_accreditation.destroy');
+
+    //manage lab routes
+    Route::get('/lab/manage', [LabController::class, 'index']);
+    Route::post('/lab/manage', [LabController::class, 'store'])->name('lab.store');
+    Route::put('/lab/manage/{id}', [LabController::class, 'update'])->name('lab.update');
+    Route::delete('/lab/manage/delete/{id}', [LabController::class, 'destroy'])->name('lab.destroy');
 
     //manage research type routes
     Route::get('/research_type/manage', [ResearchTypeController::class, 'index']);

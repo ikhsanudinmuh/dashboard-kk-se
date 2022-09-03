@@ -5,7 +5,7 @@
       @include('layouts.navbar')
       <div class="container">
         <div class="mt-3 mb-3">
-          statistik
+          <h3>Publication Data Statistics</h3>
         </div>
         <div class="mb-3">
           <canvas id="myChart"</canvas>

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\JournalAccreditation;
 use App\Models\Lab;
 use App\Models\PublicationType;
+use App\Models\ResearchType;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -54,9 +55,18 @@ class DatabaseSeeder extends Seeder
             ['name' => 'Mobile and Innovation', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Information Science and Engineering', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
             ['name' => 'Technology Enhanced Learning Center', 'created_at' => Carbon::now(), 'updated_at' => Carbon::now()],
-
+            
+        ];
+        
+        Lab::insert($lab);
+        
+        //menambahkan data research_type
+        $research_type = [
+            ['name' => 'External'],
+            ['name' => 'Internal'],
+            ['name' => 'Independent'],
         ];
 
-        Lab::insert($lab);
+        ResearchType::insert($research_type);
     }
 }

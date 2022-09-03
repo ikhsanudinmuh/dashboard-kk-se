@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GoogleProviderController;
 use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\ResearchTypeController;
 use App\Http\Controllers\UserController;
 use App\Models\Publication;
 use Illuminate\Support\Facades\Route;
@@ -47,13 +48,20 @@ Route::get('/publication/get_stats/per_journal_accreditation', [PublicationContr
 
 //admin routes
     //manage user routes
-    Route::get('/user', [UserController::class, 'index']);
-    Route::put('/user/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::get('/user/manage', [UserController::class, 'index']);
+    Route::put('/user/manage/{id}', [UserController::class, 'update'])->name('user.update');
+    Route::delete('/user/manage/delete/{id}', [UserController::class, 'destroy'])->name('user.destroy');
 
     //manage publication routes
     Route::get('/publication/manage', [PublicationController::class, 'manage']);
     Route::put('/publication/manage/{id}', [PublicationController::class, 'update'])->name('publication.update');
     Route::delete('/publication/manage/delete/{id}', [PublicationController::class, 'destroy'])->name('publication.destroy');
+    
+    //manage research type routes
+    Route::get('/research_type/manage', [ResearchTypeController::class, 'index']);
+    Route::post('/research_type/manage', [ResearchTypeController::class, 'store'])->name('research_type.store');
+    Route::put('/research_type/manage/{id}', [ResearchTypeController::class, 'update'])->name('research_type.update');
+    Route::delete('/research_type/manage/delete/{id}', [ResearchTypeController::class, 'destroy'])->name('research_type.destroy');
 
     
 

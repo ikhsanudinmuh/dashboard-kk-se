@@ -35,9 +35,16 @@
                     <td>{{ $u->code }}</td>
                     <td>{{ $u->role }}</td>
                     <td>
-                      <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editUser{{ $u->id }}">
-                        <i class="fa-solid fa-pen-to-square"></i>
-                      </button>
+                      <div class="d-flex">
+                        <button type="button" class="btn btn-warning me-1" data-bs-toggle="modal" data-bs-target="#editUser{{ $u->id }}">
+                          <i class="fa-solid fa-pen-to-square"></i>
+                        </button>
+                        <form action="{{ route('user.destroy', [$u->id]) }}" method="POST">
+                          @method('delete')
+                          @csrf
+                          <button class="btn btn-danger" onclick="return confirm('Are you sure want to delete this data?')"><i class="fa-solid fa-trash"></i></button>
+                      </form>
+                      </div>
                     </td>
                 </tr>                  
               @endforeach
@@ -46,7 +53,7 @@
         </div>
 
         @foreach ($user as $u)
-          <!-- Modal untuk lihat pdf dari publikasi -->
+          <!-- Modal untuk edit data user -->
           <div class="modal fade" id="editUser{{ $u->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
               <div class="modal-content">

@@ -5,6 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GoogleProviderController;
 use App\Http\Controllers\PatentTypeController;
 use App\Http\Controllers\PublicationController;
+use App\Http\Controllers\PublicationTypeController;
 use App\Http\Controllers\ResearchTypeController;
 use App\Http\Controllers\UserController;
 use App\Models\Publication;
@@ -59,6 +60,12 @@ Route::get('/publication/get_stats/per_journal_accreditation', [PublicationContr
     Route::put('/publication/manage/{id}', [PublicationController::class, 'update'])->name('publication.update');
     Route::delete('/publication/manage/delete/{id}', [PublicationController::class, 'destroy'])->name('publication.destroy');
     
+    //manage publication type routes
+    Route::get('/publication_type/manage', [PublicationTypeController::class, 'index']);
+    Route::post('/publication_type/manage', [PublicationTypeController::class, 'store'])->name('publication_type.store');
+    Route::put('/publication_type/manage/{id}', [PublicationTypeController::class, 'update'])->name('publication_type.update');
+    Route::delete('/publication_type/manage/delete/{id}', [PublicationTypeController::class, 'destroy'])->name('publication_type.destroy');
+
     //manage research type routes
     Route::get('/research_type/manage', [ResearchTypeController::class, 'index']);
     Route::post('/research_type/manage', [ResearchTypeController::class, 'store'])->name('research_type.store');

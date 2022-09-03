@@ -79,7 +79,7 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'code' => 'string',
+            'code' => 'string|unique:users,code',
         ]);
 
         $user = User::findOrFail($id);
@@ -89,7 +89,7 @@ class UserController extends Controller
         
         $user->save();
 
-        return redirect('/user')->with('success', 'Successfully update data');
+        return redirect('/user/manage')->with('success', 'Successfully update data');
     }
 
     /**
@@ -100,6 +100,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->delete();
+
+        return redirect('/user/manage')->with('success', 'Successfully delete user data');
     }
 }

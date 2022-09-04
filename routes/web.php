@@ -8,6 +8,7 @@ use App\Http\Controllers\LabController;
 use App\Http\Controllers\PatentTypeController;
 use App\Http\Controllers\PublicationController;
 use App\Http\Controllers\PublicationTypeController;
+use App\Http\Controllers\ResearchController;
 use App\Http\Controllers\ResearchTypeController;
 use App\Http\Controllers\UserController;
 use App\Models\Publication;
@@ -40,27 +41,39 @@ Route::get('/login', [AuthController::class, 'loginPage']);
 Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 //publication routes
-Route::get('/publication', [PublicationController::class, 'index']);
-Route::post('/publication', [PublicationController::class, 'store'])->name('publication.store');
-Route::get('/publication/stats/{view}', [PublicationController::class, 'stats'])->name('publication.stats');
-
-//publication stats routes
-Route::get('/publication/get_stats/per_year', [PublicationController::class, 'publicationPerYear']);
-Route::get('/publication/get_stats/per_author', [PublicationController::class, 'publicationPerAuthor']);
-Route::get('/publication/get_stats/per_author_per_year/{id}', [PublicationController::class, 'publicationPerAuthorPerYear']);
-Route::get('/publication/get_stats/per_publication_type', [PublicationController::class, 'publicationType']);
-Route::get('/publication/get_stats/per_journal_accreditation', [PublicationController::class, 'journalAccreditation']);
-
+    Route::get('/publication', [PublicationController::class, 'index']);
+    Route::post('/publication', [PublicationController::class, 'store'])->name('publication.store');
+    Route::get('/publication/stats/{view}', [PublicationController::class, 'stats'])->name('publication.stats');
+    //manage publication routes
+    Route::get('/publication/manage', [PublicationController::class, 'manage']);
+    Route::put('/publication/manage/{id}', [PublicationController::class, 'update'])->name('publication.update');
+    Route::delete('/publication/manage/delete/{id}', [PublicationController::class, 'destroy'])->name('publication.destroy');
+    //publication stats routes
+    Route::get('/publication/get_stats/per_year', [PublicationController::class, 'publicationPerYear']);
+    Route::get('/publication/get_stats/per_author', [PublicationController::class, 'publicationPerAuthor']);
+    Route::get('/publication/get_stats/per_author_per_year/{id}', [PublicationController::class, 'publicationPerAuthorPerYear']);
+    Route::get('/publication/get_stats/per_publication_type', [PublicationController::class, 'publicationType']);
+    Route::get('/publication/get_stats/per_journal_accreditation', [PublicationController::class, 'journalAccreditation']);
+    
+//research routes
+    Route::get('/research', [ResearchController::class, 'index']);
+    Route::post('/research', [ResearchController::class, 'store'])->name('research.store');
+    Route::get('/research/stats/{view}', [ResearchController::class, 'stats'])->name('research.stats');
+    //manage research routes
+    Route::get('/research/manage', [ResearchController::class, 'manage']);
+    Route::put('/research/manage/{id}', [ResearchController::class, 'update'])->name('research.update');
+    Route::delete('/research/manage/delete/{id}', [ResearchController::class, 'destroy'])->name('research.destroy');
+    //research stats routes
+    Route::get('/research/get_stats/per_year', [ResearchController::class, 'researchPerYear']);
+    Route::get('/research/get_stats/per_member', [ResearchController::class, 'researchPerMember']);
+    Route::get('/research/get_stats/per_member_per_year/{id}', [ResearchController::class, 'researchPerMemberPerYear']);
+    Route::get('/research/get_stats/per_research_type', [ResearchController::class, 'researchType']);
+    
 //admin routes
     //manage user routes
     Route::get('/user/manage', [UserController::class, 'index']);
     Route::put('/user/manage/{id}', [UserController::class, 'update'])->name('user.update');
     Route::delete('/user/manage/delete/{id}', [UserController::class, 'destroy'])->name('user.destroy');
-
-    //manage publication routes
-    Route::get('/publication/manage', [PublicationController::class, 'manage']);
-    Route::put('/publication/manage/{id}', [PublicationController::class, 'update'])->name('publication.update');
-    Route::delete('/publication/manage/delete/{id}', [PublicationController::class, 'destroy'])->name('publication.destroy');
     
     //manage publication type routes
     Route::get('/publication_type/manage', [PublicationTypeController::class, 'index']);

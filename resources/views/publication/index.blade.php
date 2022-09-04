@@ -18,11 +18,19 @@
                 <h3>Publication Data</h3>
             </div>
             @if (Auth::check() == TRUE)
-                @if (Auth::user()->role == 'lecturer' || Auth::user()->role == 'admin')
+                @if (Auth::user()->role == 'lecturer')
                     <div class="mb-3">
                         <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#addData" style="background-color: #BF0000">
                             Add Data
                         </button>
+                    </div>
+                @endif
+                @if (Auth::user()->role == 'admin')
+                    <div class="mb-3">
+                        <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#addData" style="background-color: #BF0000">
+                            Add Data
+                        </button>
+                        <a class="btn btn-warning" href="/publication/manage" role="button">Manage Data</a>
                     </div>
                 @endif
             @endif

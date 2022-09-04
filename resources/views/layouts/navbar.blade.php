@@ -7,7 +7,7 @@
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav">
               <a class="nav-link" href="/publication">Publication</a>
-              <a class="nav-link" href="#">Research</a>
+              <a class="nav-link" href="/research">Research</a>
               <a class="nav-link" href="#">HKI</a>
               <a class="nav-link" href="#">Abdimas</a>
             </div>
@@ -26,7 +26,6 @@
                     @elseif (Auth::user()->role == 'admin')
                       <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="/user/manage">Manage User</a></li>
-                        <li><a class="dropdown-item" href="/publication/manage">Manage Publication</a></li>
                         <li><a class="dropdown-item" href="/publication_type/manage">Manage Publication Type</a></li>
                         <li><a class="dropdown-item" href="/journal_accreditation/manage">Manage Journal Accreditation</a></li>
                         <li><a class="dropdown-item" href="/lab/manage">Manage Lab</a></li>

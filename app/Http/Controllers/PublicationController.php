@@ -307,7 +307,7 @@ class PublicationController extends Controller
                     )
                     ->get();
 
-                return view('admin.manage_publication', [
+                return view('publication.manage', [
                     'author' => $author, 
                     'publication' => $publication,
                     'publication_type' => $publication_type,

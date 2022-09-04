@@ -238,12 +238,12 @@
                         <br><br>
 
                         <h6>Author : </h6>
-                        @if ($p->author1 != NULL) , {{ $p->author1 }} @endif
-                        @if ($p->author2 != NULL) , {{ $p->author2 }} @endif
-                        @if ($p->author3 != NULL) , {{ $p->author3 }} @endif
-                        @if ($p->author4 != NULL) , {{ $p->author4 }} @endif
-                        @if ($p->author5 != NULL) , {{ $p->author5 }} @endif
-                        @if ($p->author6 != NULL) , {{ $p->author6 }} @endif
+                        @if ($p->author1 != NULL) {{ $p->author1 }}, @endif
+                        @if ($p->author2 != NULL) {{ $p->author2 }}, @endif
+                        @if ($p->author3 != NULL) {{ $p->author3 }}, @endif
+                        @if ($p->author4 != NULL) {{ $p->author4 }}, @endif
+                        @if ($p->author5 != NULL) {{ $p->author5 }}, @endif
+                        @if ($p->author6 != NULL) {{ $p->author6 }} @endif
                         <br><br>
 
                         <h6>Research Lab : </h6>

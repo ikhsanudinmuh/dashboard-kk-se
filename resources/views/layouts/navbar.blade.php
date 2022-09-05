@@ -8,7 +8,7 @@
             <div class="navbar-nav">
               <a class="nav-link" href="/publication">Publication</a>
               <a class="nav-link" href="/research">Research</a>
-              <a class="nav-link" href="#">HKI</a>
+              <a class="nav-link" href="/hki">HKI</a>
               <a class="nav-link" href="#">Abdimas</a>
             </div>
         </div>

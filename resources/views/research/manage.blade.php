@@ -1,5 +1,5 @@
 @include('layouts.header')
-        <title>Researchs | {{ env('APP_NAME') }}</title>    
+        <title>Manage Researchs | {{ env('APP_NAME') }}</title>    
 
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/jquery.dataTables.css">  
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
@@ -17,7 +17,7 @@
         @endif
 
         <div class="mt-3 mb-3">
-          <h3>Research Data</h3>
+          <h3>Manage Research Data</h3>
         </div>
 
         <div class="mb-3">

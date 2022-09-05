@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AbdimasController;
 use App\Http\Controllers\AbdimasTypeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GoogleProviderController;
@@ -84,6 +85,20 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
     Route::get('/hki/get_stats/per_member_per_year/{id}', [HkiController::class, 'hkiPerMemberPerYear']);
     Route::get('/hki/get_stats/per_patent_type', [HkiController::class, 'patentType']);
     
+//abdimas routes
+    Route::get('/abdimas', [AbdimasController::class, 'index']);
+    Route::post('/abdimas', [AbdimasController::class, 'store'])->name('abdimas.store');
+    Route::get('/abdimas/stats/{view}', [AbdimasController::class, 'stats'])->name('abdimas.stats');
+    //manage abdimas routes
+    Route::get('/abdimas/manage', [AbdimasController::class, 'manage']);
+    Route::put('/abdimas/manage/{id}', [AbdimasController::class, 'update'])->name('abdimas.update');
+    Route::delete('/abdimas/manage/delete/{id}', [AbdimasController::class, 'destroy'])->name('abdimas.destroy');
+    //abdimas stats routes
+    Route::get('/abdimas/get_stats/per_year', [AbdimasController::class, 'abdimasPerYear']);
+    Route::get('/abdimas/get_stats/per_member', [AbdimasController::class, 'abdimasPerMember']);
+    Route::get('/abdimas/get_stats/per_member_per_year/{id}', [AbdimasController::class, 'abdimasPerMemberPerYear']);
+    Route::get('/abdimas/get_stats/per_abdimas_type', [AbdimasController::class, 'abdimasType']);
+
 //admin routes
     //manage user routes
     Route::get('/user/manage', [UserController::class, 'index']);

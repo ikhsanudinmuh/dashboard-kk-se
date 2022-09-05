@@ -9,7 +9,7 @@
               <a class="nav-link" href="/publication">Publication</a>
               <a class="nav-link" href="/research">Research</a>
               <a class="nav-link" href="/hki">HKI</a>
-              <a class="nav-link" href="#">Abdimas</a>
+              <a class="nav-link" href="/abdimas">Abdimas</a>
             </div>
         </div>
         <div class="d-flex flex-row-reverse">

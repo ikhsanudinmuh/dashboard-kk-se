@@ -3,6 +3,7 @@
 use App\Http\Controllers\AbdimasTypeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\GoogleProviderController;
+use App\Http\Controllers\HkiController;
 use App\Http\Controllers\JournalAccreditationController;
 use App\Http\Controllers\LabController;
 use App\Http\Controllers\PatentTypeController;
@@ -68,6 +69,20 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('auth.logout');
     Route::get('/research/get_stats/per_member', [ResearchController::class, 'researchPerMember']);
     Route::get('/research/get_stats/per_member_per_year/{id}', [ResearchController::class, 'researchPerMemberPerYear']);
     Route::get('/research/get_stats/per_research_type', [ResearchController::class, 'researchType']);
+
+//hki routes
+    Route::get('/hki', [HkiController::class, 'index']);
+    Route::post('/hki', [HkiController::class, 'store'])->name('hki.store');
+    Route::get('/hki/stats/{view}', [HkiController::class, 'stats'])->name('hki.stats');
+    // //manage hki routes
+    Route::get('/hki/manage', [HkiController::class, 'manage']);
+    Route::put('/hki/manage/{id}', [HkiController::class, 'update'])->name('hki.update');
+    Route::delete('/hki/manage/delete/{id}', [HkiController::class, 'destroy'])->name('hki.destroy');
+    // //hki stats routes
+    Route::get('/hki/get_stats/per_year', [HkiController::class, 'hkiPerYear']);
+    Route::get('/hki/get_stats/per_member', [HkiController::class, 'hkiPerMember']);
+    Route::get('/hki/get_stats/per_member_per_year/{id}', [HkiController::class, 'hkiPerMemberPerYear']);
+    Route::get('/hki/get_stats/per_patent_type', [HkiController::class, 'patentType']);
     
 //admin routes
     //manage user routes

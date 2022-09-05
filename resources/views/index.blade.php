@@ -10,6 +10,14 @@
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             @endif
+
+            @if (Auth::check())
+                @if (Auth::user()->role == 'user')
+                    <div class="alert alert-warning mt-3 mb-3" role="alert">
+                        This account can't add data, Please contact the admin to get a lecturer role
+                    </div>
+                @endif
+            @endif
         </div>
     </body>
 </html>

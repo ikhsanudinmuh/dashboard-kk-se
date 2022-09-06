@@ -72,6 +72,7 @@ class PublicationController extends Controller
 
     public function publicationPerYear()
     {
+        //menampilkan banyaknya data publikasi berdasarkan tahun
         $data = DB::table('publications')
             ->select('year', DB::raw('count(*) as total'))
             ->groupBy('year')
@@ -82,11 +83,14 @@ class PublicationController extends Controller
 
     public function publicationPerAuthor()
     {
+        //mencari user yang memiliki role lecturer
         $lecturer = User::where('role', 'lecturer')
             ->get();
 
+        //membuat variabel baru bernama response
         $response = [];
 
+        //menghitung banyaknya data publikasi berdasarkan author
         foreach ($lecturer as $author) {
             $count = DB::table('publications')
                 ->where('publications.author_1_id', $author->id)
@@ -111,11 +115,14 @@ class PublicationController extends Controller
 
     public function publicationPerAuthorPerYear($id)
     {
+        //mencari data user berdasarkan id
         $lecturer = User::where('id', $id)
             ->get();
 
+        //membuat variabel baru bernama response
         $response = [];
 
+        //menghitung banyaknya publikasi berdasarkan author dan tahun
         foreach ($lecturer as $author) {
             $data = DB::table('publications')
                 ->where('publications.author_1_id', $author->id)
@@ -142,6 +149,7 @@ class PublicationController extends Controller
 
     public function publicationType() 
     {
+        //menampilkan banyaknya data publikasi berdasarkan tipe publikasi
         $data = DB::table('publications')
             ->leftJoin('publication_types', 'publications.publication_type_id', '=', 'publication_types.id')
             ->select('publication_types.name as pt_name', DB::raw('count(*) as total'))
@@ -153,6 +161,7 @@ class PublicationController extends Controller
 
     public function journalAccreditation() 
     {
+        //menampilkan banyaknya data publikasi berdasarkan akreditasi jurnal
         $data = DB::table('publications')
             ->leftJoin('journal_accreditations', 'publications.journal_accreditation_id', '=', 'journal_accreditations.id')
             ->select('journal_accreditations.name as ja_name', DB::raw('count(*) as total'))
@@ -164,6 +173,7 @@ class PublicationController extends Controller
 
     public function stats($view) 
     {
+        //menampilkan halaman statistik berdasarkan view
         if ($view == 'per_year') {
             return view('publication.stats_per_year');
         } else if($view == 'per_publication_type') {
@@ -197,6 +207,7 @@ class PublicationController extends Controller
      */
     public function store(Request $request)
     {
+        //validasi input user
         $data = $request->validate([
             'year' => 'required|numeric',
             'author_1_id' => 'required|numeric',
@@ -209,6 +220,7 @@ class PublicationController extends Controller
             'publication_file' => 'mimes:pdf',
         ]);
 
+        //membuat data publikasi baru
         $publication = new Publication();
         $publication->year = $request->year;
         $publication->author_1_id = $request->author_1_id;
@@ -225,6 +237,7 @@ class PublicationController extends Controller
         $publication->journal_accreditation_id = $request->journal_accreditation_id;
         $publication->link = $request->link;
 
+        //validasi jika ada file yang diupload dan memindahkannya ke folder public
         if ($request->hasFile('publication_file')) {
             $file = 'publication_' . time() . '.' . $request->file('publication_file')->extension();
 
@@ -236,6 +249,7 @@ class PublicationController extends Controller
 
 
         try {
+            //menyimpan data publikasi
             $publication->save();
 
             return redirect('/publication')->with('success', 'Successfully added publication data');
@@ -265,7 +279,9 @@ class PublicationController extends Controller
      */
     public function manage()
     {
+        //validasi user telah login
         if (Auth::check() == TRUE) {
+            //validasi user yang login adalah admin
             if (Auth::user()->role == 'admin') {
                 //ambil data penulis
                 $author = User::where('role', 'lecturer')
@@ -330,6 +346,7 @@ class PublicationController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //validasi input user
         $data = $request->validate([
             'year' => 'required|numeric',
             'author_1_id' => 'required|numeric',
@@ -342,6 +359,7 @@ class PublicationController extends Controller
             'publication_file' => 'mimes:pdf',
         ]);
 
+        //mencari data publikasi berdasarkan id, dan menerima input baru
         $publication = Publication::findOrFail($id);
 
         $publication->year = $request->year;
@@ -359,6 +377,7 @@ class PublicationController extends Controller
         $publication->journal_accreditation_id = $request->journal_accreditation_id;
         $publication->link = $request->link;
 
+        //validasi jika ada file baru
         if ($request->hasFile('publication_file')) {
             $file = 'publication_' . time() . '.' . $request->file('publication_file')->extension();
 
@@ -367,6 +386,7 @@ class PublicationController extends Controller
         }
 
         try {
+            //menyimpan data publikasi
             $publication->save();
 
             return redirect('/publication/manage')->with('success', 'Successfully update publication data');
@@ -384,7 +404,9 @@ class PublicationController extends Controller
      */
     public function destroy($id)
     {
+        //mencari data publikasi berdasarkan id
         $publication = Publication::find($id);
+        //menghapus data publikasi
         $publication->delete();
 
         return redirect('/publication/manage')->with('success', 'Successfully delete publication data');

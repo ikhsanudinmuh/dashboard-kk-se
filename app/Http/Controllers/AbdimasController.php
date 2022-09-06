@@ -59,6 +59,7 @@ class AbdimasController extends Controller
 
     public function store(Request $request)
     {
+        //validasi input user
         $request->validate([
             'year' => 'required|numeric',
             'abdimas_type_id' => 'required|numeric',
@@ -69,6 +70,7 @@ class AbdimasController extends Controller
             'abdimas_file' => 'mimes:pdf',
         ]);
 
+        //membuat data abdimas baru berdasarkan input user
         $abdimas = new Abdimas();
         $abdimas->year = $request->year;
         $abdimas->abdimas_type_id = $request->abdimas_type_id;
@@ -85,6 +87,7 @@ class AbdimasController extends Controller
         $abdimas->partner_address = $request->partner_address != '' ? $request->partner_address : null;
         $abdimas->lab_id = $request->lab_id;
 
+        //memindahkan file yang diupload oleh user ke folder public
         if ($request->hasFile('abdimas_file')) {
             $file = 'abdimas_' . time() . '.' . $request->file('abdimas_file')->extension();
 
@@ -94,6 +97,7 @@ class AbdimasController extends Controller
             $abdimas->abdimas_file = null;
         }
 
+        //menyimpan data abdimas
         $abdimas->save();
 
         return redirect('/abdimas')->with('success', 'Successfully added abdimas data');
@@ -101,7 +105,9 @@ class AbdimasController extends Controller
 
     public function manage()
     {
+        //validasi user telah login
         if (Auth::check() == TRUE) {
+            //validasi user yang login adalah admin
             if (Auth::user()->role == 'admin') {
                 //ambil data anggota abdimas
                 $member = User::where('role', 'lecturer')
@@ -152,6 +158,7 @@ class AbdimasController extends Controller
 
     public function update(Request $request, $id)
     {
+        //validasi input user
         $request->validate([
             'year' => 'required|numeric',
             'abdimas_type_id' => 'required|numeric',
@@ -162,6 +169,7 @@ class AbdimasController extends Controller
             'abdimas_file' => 'mimes:pdf',
         ]);
 
+        //mencari data abdimas berdasarkan id, lalu mengambil data yang baru berdasarkan input user
         $abdimas = Abdimas::findOrFail($id);
         $abdimas->year = $request->year;
         $abdimas->abdimas_type_id = $request->abdimas_type_id;
@@ -178,6 +186,7 @@ class AbdimasController extends Controller
         $abdimas->partner_address = $request->partner_address != '' ? $request->partner_address : null;
         $abdimas->lab_id = $request->lab_id;
 
+        //validasi adanya file baru
         if ($request->hasFile('abdimas_file')) {
             $file = 'abdimas_' . time() . '.' . $request->file('abdimas_file')->extension();
 
@@ -185,6 +194,7 @@ class AbdimasController extends Controller
             $abdimas->abdimas_file = $file;
         } 
 
+        //menyimpan data abdimas
         $abdimas->save();
 
         return redirect('/abdimas')->with('success', 'Successfully edit abdimas data');
@@ -192,7 +202,9 @@ class AbdimasController extends Controller
 
     public function destroy($id)
     {
+        //mencari data abdimas berdasarkan id
         $abdimas = Abdimas::find($id);
+        //menghapus data abdimas
         $abdimas->delete();
 
         return redirect('/abdimas/manage')->with('success', 'Successfully delete abdimas data');
@@ -200,6 +212,7 @@ class AbdimasController extends Controller
 
     public function abdimasPerYear()
     {
+        //menampilkan banyaknya data abdimas berdasarkan tahun
         $data = DB::table('abdimas')
             ->select('year', DB::raw('count(*) as total'))
             ->groupBy('year')
@@ -210,11 +223,14 @@ class AbdimasController extends Controller
 
     public function abdimasPerMember()
     {
+        //mencari user yang memiliki role lecturer
         $lecturer = User::where('role', 'lecturer')
             ->get();
 
+        //membuat variabel bernama response
         $response = [];
 
+        //menghitung banyaknya data abdimas yang dibuat setiap member berdasarkan tahun
         foreach ($lecturer as $member) {
             $count = DB::table('abdimas')
                 ->where('abdimas.leader_id', $member->id)
@@ -239,11 +255,14 @@ class AbdimasController extends Controller
 
     public function abdimasPerMemberPerYear($id)
     {
+        //mencari data user berdasarkan id
         $lecturer = User::where('id', $id)
             ->get();
 
+        //membuat variabel bernama response
         $response = [];
 
+        //menghitung banyaknya data abdimas yang telah dibuat oleh member berdasarkan id
         foreach ($lecturer as $member) {
             $data = DB::table('abdimas')
                 ->where('abdimas.leader_id', $member->id)
@@ -270,6 +289,7 @@ class AbdimasController extends Controller
 
     public function abdimasType() 
     {
+        //menampilkan banyaknya data abdimas berdasarkan tipe abdimas
         $data = DB::table('abdimas')
             ->leftJoin('abdimas_types', 'abdimas.abdimas_type_id', '=', 'abdimas_types.id')
             ->select('abdimas_types.name as at_name', DB::raw('count(*) as total'))
@@ -281,6 +301,7 @@ class AbdimasController extends Controller
 
     public function stats($view) 
     {
+        //menampilkan halaman statistik berdasarkan view
         if ($view == 'per_year') {
             return view('abdimas.stats_per_year');
         } else if($view == 'per_abdimas_type') {

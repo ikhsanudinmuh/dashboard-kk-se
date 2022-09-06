@@ -55,6 +55,7 @@ class ResearchController extends Controller
 
     public function store(Request $request)
     {
+        //validasi input user
         $request->validate([
             'year' => 'required|numeric',
             'research_type_id' => 'required|numeric',
@@ -65,6 +66,7 @@ class ResearchController extends Controller
             'research_file' => 'mimes:pdf',
         ]);
 
+        //membuat data penelitian baru
         $research = new Research();
         $research->year = $request->year;
         $research->research_type_id = $request->research_type_id;
@@ -78,6 +80,7 @@ class ResearchController extends Controller
         $research->partner = $request->partner != '' ? $request->partner : null;
         $research->lab_id = $request->lab_id;
 
+        //validasi jika ada file yang diupload
         if ($request->hasFile('research_file')) {
             $file = 'research_' . time() . '.' . $request->file('research_file')->extension();
 
@@ -87,6 +90,7 @@ class ResearchController extends Controller
             $research->research_file = null;
         }
 
+        //menyimpan data penelitian
         $research->save();
 
         return redirect('/research')->with('success', 'Successfully added research data');
@@ -94,7 +98,9 @@ class ResearchController extends Controller
 
     public function manage()
     {
+        //validasi user telah login
         if (Auth::check() == TRUE) {
+            //validasi user yang login adalah admin
             if (Auth::user()->role == 'admin') {
                 //ambil data anggota penelitian
                 $member = User::where('role', 'lecturer')
@@ -141,6 +147,7 @@ class ResearchController extends Controller
 
     public function update(Request $request, $id)
     {
+        //validasi input user
         $request->validate([
             'year' => 'required|numeric',
             'research_type_id' => 'required|numeric',
@@ -151,6 +158,7 @@ class ResearchController extends Controller
             'research_file' => 'mimes:pdf',
         ]);
 
+        //mencari data penelitian berdasarkan id
         $research = Research::findOrFail($id);
         $research->year = $request->year;
         $research->research_type_id = $request->research_type_id;
@@ -164,6 +172,7 @@ class ResearchController extends Controller
         $research->partner = $request->partner != '' ? $request->partner : null;
         $research->lab_id = $request->lab_id;
 
+        //validasi jika ada file baru yang diupload
         if ($request->hasFile('research_file')) {
             $file = 'research_' . time() . '.' . $request->file('research_file')->extension();
 
@@ -171,6 +180,7 @@ class ResearchController extends Controller
             $research->research_file = $file;
         } 
 
+        //menyimpan data penelitian
         $research->save();
 
         return redirect('/research/manage')->with('success', 'Successfully updated research data');
@@ -178,7 +188,9 @@ class ResearchController extends Controller
 
     public function destroy($id)
     {
+        //mencari data penelitian berdasarkan id
         $research = Research::find($id);
+        //menghapus data penelitian
         $research->delete();
 
         return redirect('/research/manage')->with('success', 'Successfully delete research data');
@@ -186,6 +198,7 @@ class ResearchController extends Controller
 
     public function researchPerYear()
     {
+        //menampilkan data penelitian berdasarkan tahun
         $data = DB::table('researchs')
             ->select('year', DB::raw('count(*) as total'))
             ->groupBy('year')
@@ -196,11 +209,14 @@ class ResearchController extends Controller
 
     public function researchPerMember()
     {
+        //mencari user yang memiliki role lecturer
         $lecturer = User::where('role', 'lecturer')
             ->get();
 
+        //membuat variabel bernama response
         $response = [];
 
+        //menghitung banyaknya data penelitian berdasarkan member
         foreach ($lecturer as $member) {
             $count = DB::table('researchs')
                 ->where('researchs.leader_id', $member->id)
@@ -223,11 +239,14 @@ class ResearchController extends Controller
 
     public function researchPerMemberPerYear($id)
     {
+        //mencari user berdasarkan id
         $lecturer = User::where('id', $id)
             ->get();
 
+        //membuat variabel baru bernama response
         $response = [];
 
+        //menghitung banyaknya data penelitian berdasarkan member dan tahun
         foreach ($lecturer as $member) {
             $data = DB::table('researchs')
                 ->where('researchs.leader_id', $member->id)
@@ -252,6 +271,7 @@ class ResearchController extends Controller
 
     public function researchType() 
     {
+        //menampilkan banyaknya data penelitian berdasarkan tipe penelitian
         $data = DB::table('researchs')
             ->leftJoin('research_types', 'researchs.research_type_id', '=', 'research_types.id')
             ->select('research_types.name as rt_name', DB::raw('count(*) as total'))
@@ -263,6 +283,7 @@ class ResearchController extends Controller
 
     public function stats($view) 
     {
+        //menampilkan halaman berdasarkan view
         if ($view == 'per_year') {
             return view('research.stats_per_year');
         } else if($view == 'per_research_type') {

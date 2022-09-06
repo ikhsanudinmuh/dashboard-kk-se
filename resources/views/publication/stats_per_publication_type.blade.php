@@ -1,7 +1,10 @@
+{{-- halaman untuk menampilkan statistik data publikasi per tipe publikasi --}}
+{{-- memanggil header --}}
 @include('layouts.header')
         <title>Publication per Type Statistics | {{ env('APP_NAME') }}</title>    
     </head>
     <body>
+      {{-- memanggil navbar --}}
       @include('layouts.navbar')
       <div class="container">
         <div class="mt-3 mb-3">

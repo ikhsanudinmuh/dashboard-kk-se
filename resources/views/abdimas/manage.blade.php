@@ -1,3 +1,5 @@
+{{-- halaman untuk manage data abdimas --}}
+{{-- memanggil header --}}
 @include('layouts.header')
         <title>Manage Abdimas | {{ env('APP_NAME') }}</title>    
 
@@ -6,9 +8,11 @@
         <script src="https://kit.fontawesome.com/c2640fba80.js" crossorigin="anonymous"></script>
     </head>
     <body>
+      {{-- memanggil navbar --}}
       @include('layouts.navbar')
 
       <div class="container">
+        {{-- menampilkan alert ketika berhasil mengubah atau menghapus data --}}
         @if (session('success'))
           <div class="alert alert-success" role="alert">
               {{ session('success') }}
@@ -21,6 +25,7 @@
         </div>
 
         <div class="mb-3">
+          {{-- tabel data abdimas --}}
           <table id="table_abdimas" class="display">
             <thead>
               <tr>
@@ -35,6 +40,7 @@
               </tr>
             </thead>
             <tbody>
+              {{-- menampilkan data abdimas di tabel --}}
               @foreach ($abdimas as $ad)
                 <tr>
                   <td>{{ $ad->year }}</td>
@@ -257,7 +263,7 @@
           </div>
           </div>
         </div>
-          <!-- Modal untuk lihat detail data penelitian -->
+          <!-- Modal untuk lihat detail data abdimas -->
           <div class="modal fade" id="abdimasDetail{{ $ad->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
             <div class="modal-content">

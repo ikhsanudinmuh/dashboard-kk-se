@@ -1,3 +1,5 @@
+{{-- halaman index data publikasi --}}
+{{-- memanggil header --}}
 @include('layouts.header')
         <title>Publications | {{ env('APP_NAME') }}</title>    
 
@@ -5,8 +7,10 @@
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
     </head>
     <body>
+        {{-- memanggil navbar --}}
         @include('layouts.navbar')
         <div class="container">
+            {{-- menampilkan alert ketika berhasil menambahkan data --}}
             @if (session('success'))
                 <div class="alert alert-success" role="alert">
                     {{ session('success') }}
@@ -17,7 +21,9 @@
             <div class="mt-3 mb-3">
                 <h3>Publication Data</h3>
             </div>
+            {{-- validasi user telah login --}}
             @if (Auth::check() == TRUE)
+                {{-- validasi jika user yang login adalah role lecturer --}}
                 @if (Auth::user()->role == 'lecturer')
                     <div class="mb-3">
                         <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#addData" style="background-color: #BF0000">
@@ -25,6 +31,7 @@
                         </button>
                     </div>
                 @endif
+                {{-- validasi jika user yang login adalah role admin --}}
                 @if (Auth::user()->role == 'admin')
                     <div class="mb-3">
                         <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#addData" style="background-color: #BF0000">
@@ -35,6 +42,7 @@
                 @endif
             @endif
             <div class="mb-3">
+                {{-- tabel data publikasi --}}
                 <table id="table_publication" class="display">
                     <thead>
                         <tr>
@@ -47,6 +55,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {{-- menampilkan data publikasi di tabel --}}
                         @foreach ($publication as $p)
                             <tr>
                                 <td>{{ $p->year }}</td>

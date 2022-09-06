@@ -1,3 +1,5 @@
+    {{-- halaman ini belum jadi digunakan --}}
+    {{-- mengambil header --}}
     @include('layouts.header')
     <title>Register User | {{ env('APP_NAME') }}</title>    
     <style>

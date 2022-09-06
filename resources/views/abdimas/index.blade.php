@@ -1,3 +1,5 @@
+{{-- halaman index untuk data abdimas --}}
+{{-- memanggil header --}}
 @include('layouts.header')
         <title>Abdimas | {{ env('APP_NAME') }}</title>    
 
@@ -5,9 +7,11 @@
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
     </head>
     <body>
+      {{-- memanggil navbar --}}
       @include('layouts.navbar')
 
       <div class="container">
+        {{-- menampilkan alert ketika berhasil mengubah atau menghapus data --}}
         @if (session('success'))
           <div class="alert alert-success" role="alert">
               {{ session('success') }}
@@ -19,16 +23,21 @@
           <h3>Abdimas Data</h3>
         </div>
 
+        {{-- validasi user telah login --}}
         @if (Auth::check() == TRUE)
+          {{-- validasi user yang login adalah lecturer --}}
           @if (Auth::user()->role == 'lecturer')
             <div class="mb-3">
+                {{-- button untuk menampilkan modal add data --}}
                 <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#addData" style="background-color: #BF0000">
                   Add Data
                 </button>
             </div>
           @endif
+          {{-- validasi user yang login adalah admin --}}
           @if (Auth::user()->role == 'admin')
               <div class="mb-3">
+                {{-- button untuk menampilkan modal add data --}}
                 <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#addData" style="background-color: #BF0000">
                     Add Data
                 </button>
@@ -38,6 +47,7 @@
         @endif
 
         <div class="mb-3">
+          {{-- tabel data abdimas --}}
           <table id="table_abdimas" class="display">
             <thead>
               <tr>
@@ -51,6 +61,7 @@
               </tr>
             </thead>
             <tbody>
+              {{-- menampilkan data abdimas di tabel --}}
               @foreach ($abdimas as $ad)
                 <tr>
                   <td>{{ $ad->year }}</td>
@@ -228,7 +239,7 @@
       </div>
 
       @foreach ($abdimas as $ad)
-          <!-- Modal untuk lihat detail data penelitian -->
+          <!-- Modal untuk lihat detail data abdimas -->
           <div class="modal fade" id="abdimasDetail{{ $ad->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
             <div class="modal-content">

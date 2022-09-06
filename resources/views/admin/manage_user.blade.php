@@ -1,3 +1,5 @@
+{{-- halaman untuk manage data user --}}
+{{-- memanggil header --}}
 @include('layouts.header')
         <title>Manage User | {{ env('APP_NAME') }}</title>    
 
@@ -6,8 +8,10 @@
         <script src="https://kit.fontawesome.com/c2640fba80.js" crossorigin="anonymous"></script>
     </head>
     <body>
+        {{-- memanggil navbar --}}
         @include('layouts.navbar')
         <div class="container">
+          {{-- menampilkan alert ketika berhasil mengubah atau menghapus data --}}
           @if (session('success'))
             <div class="alert alert-success" role="alert">
                 {{ session('success') }}
@@ -19,6 +23,7 @@
             <h3>User Data</h3>
           </div>
 
+          {{-- tabel data user --}}
           <table id="table_user" class="display">
             <thead>
               <tr>
@@ -29,6 +34,7 @@
               </tr>
             </thead>
             <tbody>
+              {{-- menampilkan data user di tabel --}}
               @foreach ($user as $u)
                 <tr>
                     <td>{{ $u->name }}</td>

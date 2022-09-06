@@ -1,3 +1,5 @@
+{{-- halaman untuk manage data lab --}}
+{{-- memanggil header --}}
 @include('layouts.header')
         <title>Manage Lab | {{ env('APP_NAME') }}</title>    
 
@@ -6,8 +8,10 @@
         <script src="https://kit.fontawesome.com/c2640fba80.js" crossorigin="anonymous"></script>
     </head>
     <body>
+      {{-- memanggil navbar --}}
         @include('layouts.navbar')
         <div class="container">
+          {{-- menampilkan alert ketika berhasil mengubah atau menghapus data --}}
           @if (session('success'))
             <div class="alert alert-success" role="alert">
                 {{ session('success') }}
@@ -20,11 +24,13 @@
           </div>
 
           <div class="mb-3">
+            {{-- button untuk menampilkan modal add data --}}
             <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#addData" style="background-color: #BF0000">
                 Add Data
             </button>
           </div>
 
+          {{-- tabel data lab --}}
           <table id="table_lab" class="display">
             <thead>
               <tr>
@@ -33,6 +39,7 @@
               </tr>
             </thead>
             <tbody>
+              {{-- menampilkan data lab di tabel --}}
               @foreach ($lab as $l)
                 <tr>
                     <td>{{ $l->name }}</td>

@@ -1,3 +1,5 @@
+{{-- halaman untuk manage data penelitian --}}
+{{-- memanggil header --}}
 @include('layouts.header')
         <title>Manage Researchs | {{ env('APP_NAME') }}</title>    
 
@@ -9,6 +11,7 @@
       @include('layouts.navbar')
 
       <div class="container">
+        {{-- menampilkan alert ketika berhasil mengubah atau menghapus data --}}
         @if (session('success'))
           <div class="alert alert-success" role="alert">
               {{ session('success') }}
@@ -21,6 +24,7 @@
         </div>
 
         <div class="mb-3">
+          {{-- tabel data penelitian --}}
           <table id="table_research" class="display">
             <thead>
               <tr>
@@ -35,6 +39,7 @@
               </tr>
             </thead>
             <tbody>
+              {{-- menampilkan data penelitian di tabel --}}
               @foreach ($research as $r)
                 <tr>
                   <td>{{ $r->year }}</td>

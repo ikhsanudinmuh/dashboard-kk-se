@@ -1,3 +1,5 @@
+{{-- halaman untuk menampilkan statistik data abdimas per member --}}
+{{-- memanggil header --}}
 @include('layouts.header')
         <title>Abdimas per Member Statistics | {{ env('APP_NAME') }}</title>    
     </head>

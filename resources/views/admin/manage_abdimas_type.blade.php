@@ -1,3 +1,5 @@
+{{-- halaman untuk manage data tipe abdimas --}}
+{{-- memanggil header --}}
 @include('layouts.header')
         <title>Manage Abdimas Type | {{ env('APP_NAME') }}</title>    
 
@@ -6,8 +8,10 @@
         <script src="https://kit.fontawesome.com/c2640fba80.js" crossorigin="anonymous"></script>
     </head>
     <body>
+        {{-- memanggil navbar --}}
         @include('layouts.navbar')
         <div class="container">
+          {{-- menampilkan alert ketika berhasil mengubah atau menghapus data --}}
           @if (session('success'))
             <div class="alert alert-success" role="alert">
                 {{ session('success') }}
@@ -20,11 +24,13 @@
           </div>
 
           <div class="mb-3">
+            {{-- button untuk memanggil modal add data --}}
             <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#addData" style="background-color: #BF0000">
                 Add Data
             </button>
           </div>
 
+          {{-- tabel data tipe abdimas --}}
           <table id="table_abdimas_type" class="display">
             <thead>
               <tr>
@@ -33,6 +39,7 @@
               </tr>
             </thead>
             <tbody>
+              {{-- menampikan data tipe abdimas di tabel --}}
               @foreach ($abdimas_type as $at)
                 <tr>
                     <td>{{ $at->name }}</td>

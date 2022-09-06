@@ -1,7 +1,10 @@
+{{-- halaman untuk menampilkan statistik data penelitian per member --}}
+{{-- memanggil header --}}
 @include('layouts.header')
         <title>Research per Member Statistics | {{ env('APP_NAME') }}</title>    
     </head>
     <body>
+      {{-- memanggil navbar --}}
       @include('layouts.navbar')
       <div class="container">
         <div class="mt-3 mb-3">

@@ -1,3 +1,4 @@
+{{-- file untuk memanggil script dan css yang sekiranya digunakan di semua halaman --}}
 <!doctype html>
 <html lang="en">
     <head>

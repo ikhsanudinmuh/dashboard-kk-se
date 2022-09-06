@@ -1,3 +1,5 @@
+{{-- halaman untuk login --}}
+{{-- mengambil header --}}
 @include('layouts.header')
         <title>Login | {{ env('APP_NAME') }}</title>    
         <style>
@@ -37,12 +39,14 @@
                     <div class="d-flex justify-content-center mb-3">
                         <h3>Login</h3>
                     </div>
+                    {{-- menampilkan alert ketika user berhasil register --}}
                     @if (session('registerSuccess'))
                         <div class="alert alert-danger" role="alert">
                             {{ session('registerSuccess') }}
                             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                         </div>
                     @endif
+                    {{-- menampilkan alert ketika login gagal --}}
                     @if (session('loginFailed'))
                         <div class="alert alert-danger" role="alert">
                             {{ session('loginFailed') }}
@@ -68,6 +72,7 @@
                             <a href="/">Back to home</a>                            
                         </div>
                     </form> --}}
+                    {{-- memindahkan user ke halaman login google --}}
                     <div class="d-flex justify-content-center mb-3">
                         <a href="{{ route('redirect') }}" class="btn text-white" style="background-color: #BF0000"><img src="/assets/google.png" alt="" srcset="" style="height: 25px;"> Login with Google</a>
                     </div>

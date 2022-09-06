@@ -1,3 +1,5 @@
+{{-- halaman untuk manage data publikasi --}}
+{{-- memanggil header --}}
 @include('layouts.header')
         <title>Manage Publications | {{ env('APP_NAME') }}</title>    
 
@@ -6,8 +8,10 @@
         <script src="https://kit.fontawesome.com/c2640fba80.js" crossorigin="anonymous"></script>
     </head>
     <body>
+        {{-- memanggil navbar --}}
         @include('layouts.navbar')
         <div class="container">
+            {{-- menampilkan alert ketika berhasil mengubah atau menghapus data --}}
             @if (session('success'))
                 <div class="alert alert-success" role="alert">
                     {{ session('success') }}
@@ -19,6 +23,7 @@
                 <h3>Manage Publication Data</h3>
             </div>
             <div class="mb-3">
+                {{-- tabel data publikasi --}}
                 <table id="table_publication" class="display">
                     <thead>
                         <tr>
@@ -32,6 +37,7 @@
                         </tr>
                     </thead>
                     <tbody>
+                        {{-- menampilkan data publikasi di tabel --}}
                         @foreach ($publication as $p)
                             <tr>
                                 <td>{{ $p->year }}</td>

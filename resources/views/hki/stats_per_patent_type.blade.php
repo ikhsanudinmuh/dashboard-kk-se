@@ -1,3 +1,5 @@
+{{-- halaman untuk menampilkan statistik data hki per jenis paten --}}
+{{-- memanggil header --}}
 @include('layouts.header')
         <title>HKI per Patent Type Statistics | {{ env('APP_NAME') }}</title>    
     </head>

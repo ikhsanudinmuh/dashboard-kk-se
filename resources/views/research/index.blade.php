@@ -1,3 +1,5 @@
+{{-- halaman index data penelitian --}}
+{{-- memanggil header --}}
 @include('layouts.header')
         <title>Researchs | {{ env('APP_NAME') }}</title>    
 
@@ -5,9 +7,11 @@
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.js"></script>
     </head>
     <body>
+      {{-- memanggil navbar --}}
       @include('layouts.navbar')
 
       <div class="container">
+        {{-- menampilkan alert ketika berhasil menambah data --}}
         @if (session('success'))
           <div class="alert alert-success" role="alert">
               {{ session('success') }}
@@ -19,7 +23,9 @@
           <h3>Research Data</h3>
         </div>
 
+        {{-- validasi user telah login --}}
         @if (Auth::check() == TRUE)
+          {{-- validasi user yang login adalah role lecturer --}}
           @if (Auth::user()->role == 'lecturer')
             <div class="mb-3">
                 <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#addData" style="background-color: #BF0000">
@@ -27,6 +33,7 @@
                 </button>
             </div>
           @endif
+          {{-- validasi user yang login adalah role admin --}}
           @if (Auth::user()->role == 'admin')
               <div class="mb-3">
                 <button type="button" class="btn text-white" data-bs-toggle="modal" data-bs-target="#addData" style="background-color: #BF0000">
@@ -38,6 +45,7 @@
         @endif
 
         <div class="mb-3">
+          {{-- tabel data penelitian --}}
           <table id="table_research" class="display">
             <thead>
               <tr>
@@ -51,6 +59,7 @@
               </tr>
             </thead>
             <tbody>
+              {{-- menampilkan data penelitian di tabel --}}
               @foreach ($research as $r)
                 <tr>
                   <td>{{ $r->year }}</td>

@@ -1,3 +1,5 @@
+{{-- halaman untuk manage data hki --}}
+{{-- memanggil header --}}
 @include('layouts.header')
         <title>Manage HKI | {{ env('APP_NAME') }}</title>    
 
@@ -6,9 +8,11 @@
         <script src="https://kit.fontawesome.com/c2640fba80.js" crossorigin="anonymous"></script>
     </head>
     <body>
+      {{-- memanggil navbar --}}
       @include('layouts.navbar')
 
       <div class="container">
+        {{-- menampilkan alert ketika berhasil mengubah atau menghapus data --}}
         @if (session('success'))
           <div class="alert alert-success" role="alert">
               {{ session('success') }}
@@ -21,6 +25,7 @@
         </div>
 
         <div class="mb-3">
+          {{-- tabel data hki --}}
           <table id="table_hki" class="display">
             <thead>
               <tr>
@@ -34,6 +39,7 @@
               </tr>
             </thead>
             <tbody>
+              {{-- menampilkan data hki di tabel --}}
               @foreach ($hki as $hd)
                 <tr>
                   <td>{{ $hd->year }}</td>

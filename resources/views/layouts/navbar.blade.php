@@ -1,3 +1,4 @@
+{{-- file untuk menampilkan navbar --}}
   <nav class="navbar navbar-dark navbar-expand-lg" style="background-color: #BF0000;">
     <div class="container-fluid">
       <a class="navbar-brand" href="/"><img src="/assets/logo kk se.png" alt="" style="height: 50px"></a>
@@ -15,14 +16,18 @@
         <div class="d-flex flex-row-reverse">
             <div class="p-2">
                 <div class="dropdown">
+                  {{-- validasi user telah login --}}
                   @if (Auth::check() == TRUE)
                     <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      {{-- menampilkan nama user yang login --}}
                       {{ Auth::user()->name }}
                     </button>
+                    {{-- validasi jika user yang login adalah role user atau lecturer --}}
                     @if (Auth::user()->role == 'user' || Auth::user()->role == 'lecturer')
                       <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
                       </ul>               
+                    {{-- validasi jika user yang login adalah role admin --}}
                     @elseif (Auth::user()->role == 'admin')
                       <ul class="dropdown-menu dropdown-menu-end">
                         <li><a class="dropdown-item" href="/user/manage">Manage User</a></li>
@@ -35,6 +40,7 @@
                         <li><a class="dropdown-item" href="/logout">Logout</a></li>
                       </ul>
                     @endif
+                  {{-- jika user belum login, maka akan ditampilkan button login --}}
                   @else
                     <a class="btn btn-light" href="/login" role="button">Login</a>
                   @endif
